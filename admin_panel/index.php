@@ -1,6 +1,8 @@
 <?php 
+
 require "header.php";
 require "navbar.php";
+
 ?>
 
      <!-- Top content -->
@@ -28,6 +30,6 @@ require "navbar.php";
             </div>
         </div>
 		
-        <?php 
-			require "footer.php";
-		?>
+<?php 
+require "footer.php";	
+?>
