@@ -1,6 +1,10 @@
 <?php 
 include '../funkcije.php';
 session_start();
+echo "Sesija: ";
+print_r($_SESSION);
+echo "</br>POST: ";
+print_r($_POST);
 if(!empty($_POST) && isset($_POST) && !empty($_POST["k_ime"]) && isset($_POST["k_ime"]) && !empty($_POST["pwd"]) && isset($_POST["pwd"]) && !empty($_POST["ime"]) && isset($_POST["ime"]) && !empty($_POST["prezime"]) && isset($_POST["prezime"]) && !empty($_POST["email"]) && isset($_POST["email"]) && !empty($_POST["tel"]) && isset($_POST["tel"]) && !empty($_POST["jmbg"]) && isset($_POST["jmbg"])){
 	
 $k_ime = test_input($_POST["k_ime"]);
@@ -18,39 +22,39 @@ $optradio = $_POST["optradio"];
 if(!empty($_POST) && isset($_POST)){
 	
 	if(isset($_POST["adminmodul"])){
-		$adminmodul = $_POST["adminmodul"];
+		$adminmodul = test_input($_POST["adminmodul"]);
 	}
 	
 	if(isset($_POST["ksluzba"])){
-		$ksluzba = $_POST["ksluzba"];
+		$ksluzba = test_input($_POST["ksluzba"]);
 	}
 	
 	if(isset($_POST["esalter"])){
-		$esalter = $_POST["esalter"];
+		$esalter = test_input($_POST["esalter"]);
 	}
 	
 	if(isset($_POST["evidencijaio"])){
-		$evidencijaio = $_POST["evidencijaio"];
+		$evidencijaio = test_input($_POST["evidencijaio"]);
 	}
 	
 	if(isset($_POST["mposlovanje"])){
-		$mposlovanje = $_POST["mposlovanje"];
+		$mposlovanje = test_input($_POST["mposlovanje"]);
 	}
 	
 	if(isset($_POST["emagacin"])){
-		$emagacin = $_POST["emagacin"];
+		$emagacin = test_input($_POST["emagacin"]);
 	}
 	
 	if(isset($_POST["blagajna"])){
-		$blagajna = $_POST["blagajna"];
+		$blagajna = test_input($_POST["blagajna"]);
 	}
 	
 	if(isset($_POST["mehanizacija"])){
-		$mehanizacija = $_POST["mehanizacija"];
+		$mehanizacija = test_input($_POST["mehanizacija"]);
 	}
 	
 	if(isset($_POST["ekancelarija"])){
-		$ekancelarija = $_POST["ekancelarija"];
+		$ekancelarija = test_input($_POST["ekancelarija"]);
 	}
 
 }
@@ -65,76 +69,77 @@ $dbname = $_SESSION["dbname"];
 
 $sql="INSERT INTO radnik (k_ime, sifra, ime, prezime, email, JMBG, nivo)
 VALUES ('$k_ime', '$sifra', '$ime', '$prezime', '$email', '$jmbg', '$optradio');
-
-INSERT INTO tel_broj (broj,kategorija_FK,osoba_FK)
+INSERT INTO tel_broj (broj,kategorija_FK,radnik_FK)
 VALUES ('$broj', '$kategorija',(SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))
 ";
 
-$sqlx = ",(SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))";
+$sqlx1 = "INSERT INTO moduli (radnik_FK) 
+VALUES(SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik))";
 
 	if(!empty($adminmodul)){
-		$sql1 = "INSERT INTO moduli (Admin_modul,radnik_FK)
-		VALUES ('$adminmodul'".$sqlx;
+		$sql1 = "INSERT INTO moduli (Admin_modul)
+		VALUES ('$adminmodul')";
 		
-		$sql .= "; ".$sql1;
+		$sqlx1 .= "; ".$sql1;
 	}
 
 	if(!empty($ksluzba)){
-		$sql2 = "INSERT INTO moduli (Kadrovska_služba,radnik_FK)
-		VALUES ('$ksluzba'".$sqlx;
+		$sql2 = "INSERT INTO moduli (Kadrovska_služba)
+		VALUES ('$ksluzba')";
 	
-		$sql .= "; ".$sql2;
+		$sqlx1 .= "; ".$sql2;
 	}
 
 	if(!empty($esalter)){
-		$sql3 = "INSERT INTO moduli (E_šalter,radnik_FK)
-		VALUES ('$esalter'".$sqlx;
+		$sql3 = "INSERT INTO moduli (E_šalter)
+		VALUES ('$esalter')";
 		
-		$sql .= "; ".$sql3;
+		$sqlx1 .= "; ".$sql3;
 	}
 
 	if(!empty($evidencijaio)){
-		$sql4 = "INSERT INTO moduli (Evidencija_ulaza_izlaza,radnik_FK)
-		VALUES ('$evidencijaio'".$sqlx;
+		$sql4 = "INSERT INTO moduli (Evidencija_ulaza_izlaza)
+		VALUES ('$evidencijaio')";
 		
-		$sql .= "; ".$sql4;
+		$sqlx1 .= "; ".$sql4;
 	}
 
 	if(!empty($mposlovanje)){
-		$sql5 = "INSERT INTO moduli (Materijalno_poslovanje,radnik_FK)
-		VALUES ('$mposlovanje'".$sqlx;
+		$sql5 = "INSERT INTO moduli (Materijalno_poslovanje)
+		VALUES ('$mposlovanje')";
 		
-		$sql .= "; ".$sql5;
+		$sqlx1 .= "; ".$sql5;
 	}
 
 	if(!empty($emagacin)){
-		$sql5 = "INSERT INTO moduli (E_magacin,radnik_FK)
-		VALUES ('$emagacin'".$sqlx;
+		$sql5 = "INSERT INTO moduli (E_magacin)
+		VALUES ('$emagacin')";
 		
-		$sql .= "; ".$sql6;
+		$sqlx1 .= "; ".$sql6;
 	}
 
 	if(!empty($blagajna)){
-		$sql6 = "INSERT INTO moduli (Blagajna,radnik_FK)
-		VALUES ('$blagajna'".$sqlx;
+		$sql6 = "INSERT INTO moduli (Blagajna)
+		VALUES ('$blagajna')";
 		
-		$sql .= "; ".$sql7;
+		$sqlx1 .= "; ".$sql7;
 	}
 
 	if(!empty($mehanizacija)){
-		$sql7 = "INSERT INTO moduli (Mehanizacija,radnik_FK)
-		VALUES ('$mehanizacija'".$sqlx;
+		$sql7 = "INSERT INTO moduli (Mehanizacija)
+		VALUES ('$mehanizacija')";
 		
-		$sql .= "; ".$sql8;
+		$sqlx1 .= "; ".$sql8;
 	}
 
 	if(!empty($ekancelarija)){
-		$sql8 = "INSERT INTO moduli (E_kancelarija,radnik_FK)
-		VALUES ('$ekancelarija'".$sqlx;
+		$sql8 = "INSERT INTO moduli (E_kancelarija)
+		VALUES ('$ekancelarija')";
 		
-		$sql .= "; ".$sql9;
+		$sqlx1 ."; ".$sql9;
 	}
 
+$sql .= $sqlx1;
 
 pristup($servername,$username,$password,$dbname,$sql);
 

@@ -8,7 +8,7 @@ var url = "adminV1.php";
 		url : url,
 		data : $("#forma").serialize(),
 		success: function(data){
-					//alert(data);
+					alert(data);
 					location.replace("../index.php");
 				}
 		});

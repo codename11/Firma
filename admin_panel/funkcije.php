@@ -5,7 +5,7 @@ function pristup($servername, $username, $password, $dbname, $sql){
 	
 	if($conn->connect_error){
 	
-		die("Neuspela konekcija1: ".$conn->connect_error);
+		die("Neuspela konekcija: ".$conn->connect_error);
 	
 	}
 	
@@ -13,7 +13,7 @@ function pristup($servername, $username, $password, $dbname, $sql){
 	if ($result == TRUE) {
     //echo "Uspela konekcija";
 } else {
-    echo "Neuspela konekcija2: " . $conn->error;
+    echo "Neuspešno izvršavanje upita: " . $conn->error;
 }
 	return $result;
 

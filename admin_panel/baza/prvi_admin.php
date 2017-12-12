@@ -41,12 +41,14 @@
 		<input type="email" class="form-control" id="email" maxlength="30" placeholder="Unesi email:" name="email" value="" required>
     </div>
 	
-	<div class="form-group  row">
-		<div class="col-xs-4">
+	<div class="form-group row">
+		<div class="col-sm-10">
 			<label for="tel">Telefon:</label>
-			<input type="number" class="form-control" id="tel" maxlength="14" placeholder="Unesi telefon:" name="tel" value="" required>
+			<input type="number" class="form-control" id="tel" maxlength="10" placeholder="Unesi telefon:" name="tel" value="" required>
 		</div>
-		<?php include "kategorije_options.php"; ?>
+		
+		<?php require "kategorije_options.php"; ?>
+		
 	</div>
 	<div class="form-group">
 		<label for="jmbg">JMBG:</label>
@@ -65,7 +67,7 @@
 	
 		<div class="col-sm-4">
 			<label class="checkbox-inline">
-			  <input type="checkbox" name="admin" value="x">Admin modul
+			  <input type="checkbox" name="adminmodul" value="x">Admin modul
 			</label>
 		</div>	
 		
