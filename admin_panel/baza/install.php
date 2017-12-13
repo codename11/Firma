@@ -110,12 +110,12 @@ if(!empty($arr)){
 		id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 		korisnicko_ime VARCHAR(30) NOT NULL,
 		sifra VARCHAR(30) NOT NULL,
-		radnik_FK INT(1) UNSIGNED,
+		radnik_FK INT(10) UNSIGNED,
 		FOREIGN KEY (radnik_FK) REFERENCES radnik(id) ON UPDATE CASCADE ON DELETE CASCADE
 		)";
 
 		$sql3 = "CREATE TABLE tel_kategorija (
-		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+		id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 		kategorija VARCHAR(7) NOT NULL
 		)";
 
@@ -126,16 +126,16 @@ if(!empty($arr)){
 				VALUES ('mobilni')";		
 		
 		$sql6 = "CREATE TABLE tel_broj (
-		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+		id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 		broj VARCHAR(10) NOT NULL,
 		kategorija_FK INT(1) UNSIGNED,
 		FOREIGN KEY (kategorija_FK) REFERENCES tel_kategorija(id) ON UPDATE CASCADE ON DELETE CASCADE,
-		radnik_FK INT(1) UNSIGNED,
+		radnik_FK INT(10) UNSIGNED,
 		FOREIGN KEY (radnik_FK) REFERENCES radnik(id) ON UPDATE CASCADE ON DELETE CASCADE
 		)";//Prvo se kreira polje u tabeli, pa se tek onda veže da bude foreign key.
 
 		$sql7 = "CREATE TABLE moduli (
-		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+		id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 		Admin_modul VARCHAR(5) NOT NULL,
 		Kadrovska_služba VARCHAR(5) NOT NULL,
 		E_šalter VARCHAR(5) NOT NULL,
@@ -145,7 +145,7 @@ if(!empty($arr)){
 		Blagajna VARCHAR(5) NOT NULL,
 		Mehanizacija VARCHAR(5) NOT NULL,
 		E_kancelarija VARCHAR(5) NOT NULL,
-		radnik_FK INT(1) UNSIGNED,
+		radnik_FK INT(10) UNSIGNED,
 		FOREIGN KEY (radnik_FK) REFERENCES radnik(id) ON UPDATE CASCADE ON DELETE CASCADE
 		)";//Prvo se kreira polje u tabeli, pa se tek onda veže da bude foreign key.
 		

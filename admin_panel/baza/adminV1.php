@@ -1,10 +1,10 @@
 <?php 
 include '../funkcije.php';
 session_start();
-echo "Sesija: ";
+/*echo "Sesija: ";
 print_r($_SESSION);
 echo "</br>POST: ";
-print_r($_POST);
+print_r($_POST);*/
 if(!empty($_POST) && isset($_POST) && !empty($_POST["k_ime"]) && isset($_POST["k_ime"]) && !empty($_POST["pwd"]) && isset($_POST["pwd"]) && !empty($_POST["ime"]) && isset($_POST["ime"]) && !empty($_POST["prezime"]) && isset($_POST["prezime"]) && !empty($_POST["email"]) && isset($_POST["email"]) && !empty($_POST["tel"]) && isset($_POST["tel"]) && !empty($_POST["jmbg"]) && isset($_POST["jmbg"])){
 	
 $k_ime = test_input($_POST["k_ime"]);
@@ -74,7 +74,7 @@ VALUES ('$broj', '$kategorija',(SELECT id FROM radnik WHERE id=(SELECT MAX(id) F
 ";
 
 $sqlx1 = "INSERT INTO moduli (radnik_FK) 
-VALUES(SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik))";
+VALUES((SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))";
 
 	if(!empty($adminmodul)){
 		$sql1 = "INSERT INTO moduli (Admin_modul)
@@ -135,13 +135,13 @@ VALUES(SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik))";
 	if(!empty($ekancelarija)){
 		$sql8 = "INSERT INTO moduli (E_kancelarija)
 		VALUES ('$ekancelarija')";
-		
-		$sqlx1 ."; ".$sql9;
+	 
+		$sqlx1 .= "; ".$sql9;
 	}
 
-$sql .= $sqlx1;
-
-pristup($servername,$username,$password,$dbname,$sql);
+$sql .= "; ".$sqlx1;
+echo "</br>".$sql;
+multi_pristup($servername,$username,$password,$dbname,$sql);
 
 }
 
