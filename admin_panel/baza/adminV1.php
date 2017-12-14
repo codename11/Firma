@@ -19,45 +19,69 @@ $optradio = $_POST["optradio"];
 
 }
 
-if(!empty($_POST) && isset($_POST)){
-	
-	if(isset($_POST["adminmodul"])){
+	if(!empty($_POST["adminmodul"]) && $_POST["adminmodul"] == "x"){
 		$adminmodul = test_input($_POST["adminmodul"]);
 	}
-	
-	if(isset($_POST["ksluzba"])){
-		$ksluzba = test_input($_POST["ksluzba"]);
-	}
-	
-	if(isset($_POST["esalter"])){
-		$esalter = test_input($_POST["esalter"]);
-	}
-	
-	if(isset($_POST["evidencijaio"])){
-		$evidencijaio = test_input($_POST["evidencijaio"]);
-	}
-	
-	if(isset($_POST["mposlovanje"])){
-		$mposlovanje = test_input($_POST["mposlovanje"]);
-	}
-	
-	if(isset($_POST["emagacin"])){
-		$emagacin = test_input($_POST["emagacin"]);
-	}
-	
-	if(isset($_POST["blagajna"])){
-		$blagajna = test_input($_POST["blagajna"]);
-	}
-	
-	if(isset($_POST["mehanizacija"])){
-		$mehanizacija = test_input($_POST["mehanizacija"]);
-	}
-	
-	if(isset($_POST["ekancelarija"])){
-		$ekancelarija = test_input($_POST["ekancelarija"]);
+	else{
+		$adminmodul = '';
 	}
 
-}
+	if(!empty($_POST["ksluzba"]) && $_POST["ksluzba"] == "x"){
+		$ksluzba = test_input($_POST["ksluzba"]);
+	}
+	else{
+		$ksluzba = '';
+	}
+	
+	if(!empty($_POST["esalter"]) && $_POST["esalter"] == "x"){
+		$esalter = test_input($_POST["esalter"]);
+	}
+	else{
+		$esalter = '';
+	}
+	
+	if(!empty($_POST["evidencijaio"]) && $_POST["evidencijaio"] == "x"){
+		$evidencijaio = test_input($_POST["evidencijaio"]);
+	}
+	else{
+		$evidencijaio = '';
+	}
+	
+	if(!empty($_POST["mposlovanje"]) && $_POST["mposlovanje"] == "x"){
+		$mposlovanje = test_input($_POST["mposlovanje"]);
+	}
+	else{
+		$mposlovanje = '';
+	}
+	
+	if(!empty($_POST["emagacin"]) && $_POST["emagacin"] == "x"){
+		$emagacin = test_input($_POST["emagacin"]);
+	}
+	else{
+		$emagacin = '';
+	}
+	
+	if(!empty($_POST["blagajna"]) && $_POST["blagajna"] == "x"){
+		$blagajna = test_input($_POST["blagajna"]);
+	}
+	else{
+		$blagajna = '';
+	}
+	
+	if(!empty($_POST["mehanizacija"]) && $_POST["mehanizacija"] == "x"){
+		$mehanizacija = test_input($_POST["mehanizacija"]);
+	}
+	else{
+		$mehanizacija = '';
+	}
+	
+	if(!empty($_POST["ekancelarija"]) && $_POST["ekancelarija"] == "x"){
+		$ekancelarija = test_input($_POST["ekancelarija"]);
+	}
+	else{
+		$ekancelarija = '';
+	}
+	
 //Razlika je samo sto moj server nema šifru, odnosno !empty($_SESSION["password"]) mora biti true jer je šifra prazan string.
 //if(!empty($_SESSION) && isset($_SESSION) && !empty($_SESSION["servername"]) && isset($_SESSION["servername"]) && !empty($_SESSION["username"]) && isset($_SESSION["username"]) && !empty($_SESSION["password"]) && isset($_SESSION["password"]) && !empty($_SESSION["dbname"]) && isset($_SESSION["dbname"])){
 if(!empty($_SESSION) && isset($_SESSION) && !empty($_SESSION["servername"]) && isset($_SESSION["servername"]) && !empty($_SESSION["username"]) && isset($_SESSION["username"]) && isset($_SESSION["password"]) && !empty($_SESSION["dbname"]) && isset($_SESSION["dbname"])){
@@ -73,71 +97,11 @@ INSERT INTO tel_broj (broj,kategorija_FK,radnik_FK)
 VALUES ('$broj', '$kategorija',(SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))
 ";
 
-$sqlx1 = "INSERT INTO moduli (radnik_FK) 
-VALUES((SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))";
-
-	if(!empty($adminmodul)){
-		$sql1 = "INSERT INTO moduli (Admin_modul)
-		VALUES ('$adminmodul')";
-		
-		$sqlx1 .= "; ".$sql1;
-	}
-
-	if(!empty($ksluzba)){
-		$sql2 = "INSERT INTO moduli (Kadrovska_služba)
-		VALUES ('$ksluzba')";
-	
-		$sqlx1 .= "; ".$sql2;
-	}
-
-	if(!empty($esalter)){
-		$sql3 = "INSERT INTO moduli (E_šalter)
-		VALUES ('$esalter')";
-		
-		$sqlx1 .= "; ".$sql3;
-	}
-
-	if(!empty($evidencijaio)){
-		$sql4 = "INSERT INTO moduli (Evidencija_ulaza_izlaza)
-		VALUES ('$evidencijaio')";
-		
-		$sqlx1 .= "; ".$sql4;
-	}
-
-	if(!empty($mposlovanje)){
-		$sql5 = "INSERT INTO moduli (Materijalno_poslovanje)
-		VALUES ('$mposlovanje')";
-		
-		$sqlx1 .= "; ".$sql5;
-	}
-
-	if(!empty($emagacin)){
-		$sql5 = "INSERT INTO moduli (E_magacin)
-		VALUES ('$emagacin')";
-		
-		$sqlx1 .= "; ".$sql6;
-	}
-
-	if(!empty($blagajna)){
-		$sql6 = "INSERT INTO moduli (Blagajna)
-		VALUES ('$blagajna')";
-		
-		$sqlx1 .= "; ".$sql7;
-	}
-
-	if(!empty($mehanizacija)){
-		$sql7 = "INSERT INTO moduli (Mehanizacija)
-		VALUES ('$mehanizacija')";
-		
-		$sqlx1 .= "; ".$sql8;
-	}
-
-	if(!empty($ekancelarija)){
-		$sql8 = "INSERT INTO moduli (E_kancelarija)
-		VALUES ('$ekancelarija')";
-	 
-		$sqlx1 .= "; ".$sql9;
-	}
+$sqlx1 = "INSERT INTO moduli (Admin_modul, Kadrovska_služba, E_šalter, Evidencija_ulaza_izlaza, 
+Materijalno_poslovanje, E_magacin, 	Blagajna, Mehanizacija, E_kancelarija, radnik_FK) 
+VALUES('$adminmodul', '$ksluzba', '$esalter', '$evidencijaio', '$mposlovanje', '$emagacin', 
+'$blagajna', '$mehanizacija', '$ekancelarija', 
+(SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))";
 
 $sql .= "; ".$sqlx1;
 echo "</br>".$sql;
