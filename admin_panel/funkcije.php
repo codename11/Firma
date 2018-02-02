@@ -1,171 +1,73 @@
 <?php
-function pristup($servername, $username, $password, $dbname, $sql){
 
-	$conn=new mysqli($servername, $username, $password, $dbname);
-	
-	if($conn->connect_error){
-	
-		die("Neuspela konekcija: ".$conn->connect_error);
-	
-	}
-	
-	$result = $conn->query($sql);
-	if ($result == TRUE) {
-    //echo "Uspela konekcija";
-} else {
-    echo "Neuspešno izvršavanje upita: " . $conn->error;
-}
-	return $result;
+class SimpleDB{
+    private $conn;
 
-	$conn->close();
-	
-}
+    // hide all data inside class instance
+    public function __construct($server_name, $user_name, $password, $db_name){
+        $this->conn=new mysqli($server_name, $user_name, $password, $db_name);
 
-function multi_pristup($servername, $username, $password, $dbname, $sql){
-/*Kada treba dase prikaze ovom funkcijom nesto, onda se u php fajlu treba ubaciti i 
-while($row = $result->fetch_assoc()) {
-	**.$row["id"]."</td>"."<td>".$row["ime"]."</td>" , tj. nesto u tom fazonu row["id"] i sl....
-} */
-	$conn=new mysqli($servername, $username, $password, $dbname);
-	
-	if($conn->connect_error){
-	
-		die("Neuspela konekcija: ".$conn->connect_error);
-	
-	}
-	
-	$result = $conn->multi_query($sql);
-	if ($result === TRUE) {
-    echo "New records created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
+        if($this->conn->connect_error){
+            die("ERROR: " . $this->conn->connect_error);
+        }
+    }
 
-$conn->close();
-	
-}
+    function __destruct() {
+        $this->conn->close();
+    }
 
-function test_input($data) {
-   $data = trim($data);
-   $data = stripslashes($data);
-   $data = htmlspecialchars($data);
-   return $data;
-}
+    //Function that executes single query.
+    public function execute($sql_query){
+        $result = $this->conn->query($sql_query);
+        if ($result == TRUE){
+            echo "Connection success";
+        } else {
+            echo "Connection fail: " . $conn->error;
+        }
 
-function proverai($prom){
-	$prom = test_input($prom);
-	if (preg_match("/^[a-zA-Z]*$/",$prom)){
+        return $result;
+    }
 	
-	$niz=str_split($prom);
-	$str="";
-	$i=0;
-	for($i=0;$i<sizeof($niz);$i++){
+	//Function that executes multiple queries.
+	function multi_execute($sql_query){
+
+		$result = $this->conn->multi_query($sql_query);
+		if ($result == TRUE) {
+			echo "New records created successfully";
+		} 
+		else {
+			echo "Error: " . $sql_query . "</br>" . $conn->error;
+		}
 		
-		$str.=$niz[$i];
-		
-	}
-	$str = test_input($str);
-	return $str;
+		return $result;
 
 	}
-	else{
-		return 1;
-	}
+
 }
 
-function proverae($prom){
+class Validation{
 	
-	$niz=array("err"=>"","prom"=>"","greska"=>0);
-	if (empty($prom)) {
-     $niz["err"] = "Potrebno je uneti email.";
-	 $niz["prom"] ="";
-	 $niz["greska"]++;
-   } else {
-     $prom = test_input($prom);
-     if (!filter_var($prom, FILTER_VALIDATE_EMAIL)) {
-       $niz["err"] = "Nepravilno unet email."; 
-	   $niz["prom"] ="";
-	   $niz["greska"]++;
-     }
-	 $niz["prom"] =$prom;
-   }
-	return $niz;
-}
+	private $data;
+	
+	public function __construct($par){
+        $this->data = $par;
+    }
 
-function proveras($prom){
+	public function getData() { //Getting data.
+        return $this->data;
+    }
 	
-	$niz=array("err"=>"","prom"=>"","greska"=>0);
-	if (empty($prom)) {
-     $niz["err"] = "Potrebno je uneti sifru.";
-	 $niz["prom"] ="";
-	 $niz["greska"]++;
-   } else {
-     $prom = test_input($prom);
-     if (!preg_match("/^[a-zA-Z0-9 ]*$/",$prom)) {
-       $niz["err"] = "Dozvoljena su slova, brojevi i prazna mesta."; 
-	   $niz["prom"] ="";
-	   $niz["greska"]++;
-     }
-	 $niz["prom"]= $prom;
-   }
-	return $niz;
-}
-
-function proverab($prom){
+    function __destruct() {
+        $this->data;
+    }
 	
-	$niz=array("err"=>"","prom"=>"","greska"=>0);
-	if (empty($prom)) {
-     $niz["err"] = "Potrebno je uneti broj.";
-	 $niz["prom"] ="";
-	 $niz["greska"]++;
-   } else {
-     $prom = test_input($prom);
-     if (!preg_match("/^[0-9 ]*$/",$prom)) {
-       $niz["err"] = "Dozvoljeni su samo brojevi."; 
-	   $niz["prom"] ="";
-	   $niz["greska"]++;
-     }
-	 $niz["prom"]= $prom;
-   }
-   
-   if (preg_match("/^[0-9 ]*$/",$prom)) {
-       return $niz;
-     }
-   
-}
-
-function proverafonbr($prom){
-	$prom = test_input($prom);
-	if (preg_match("/^[0-9]*$/",$prom)){
-	
-	$niz=str_split($prom);
-	$str="";
-	$i=0;
-	
-	for($i=0;$i<3;$i++){
-		
-		$str.=$niz[$i];
-		
-	}
-	$str.="/";
-	
-	for($i=3;$i<6;$i++){
-		
-		$str.=$niz[$i];
-		
-	}
-	$str.="-";
-	
-	for($i=6;$i<count($niz);$i++){
-		
-		$str.=$niz[$i];
-		
+	//Functions that check form inputs.
+	function test_input($par) {
+		$par = trim($par);
+		$par = stripslashes($par);
+		$par = htmlspecialchars($par);
+		return $par;
 	}
 	
-	return $str;
-}
-else{
-	return 1;
-}
 }
 ?>

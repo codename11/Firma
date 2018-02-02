@@ -8,7 +8,7 @@ var url1 = "inst.php";
 		url : url1,
 		data : $("#dform").serialize(),
 		success: function(data){
-					alert(data);
+					alert("Success");
 					location.replace("prvi_admin.php");
 				}
 		});
@@ -24,7 +24,7 @@ var url2 = "adminV1.php";
 		url : url2,
 		data : $("#forma").serialize(),
 		success: function(data){
-					alert(data);
+					alert("Success");
 					location.replace("../index.php");
 				}
 		});

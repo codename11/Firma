@@ -1,82 +1,115 @@
 <?php 
 include '../funkcije.php';
 session_start();
-/*echo "Sesija: ";
-print_r($_SESSION);
-echo "</br>POST: ";
-print_r($_POST);*/
+$kon = new SimpleDB("localhost", "root", "", "firma"); 
+
 if(!empty($_POST) && isset($_POST) && !empty($_POST["k_ime"]) && isset($_POST["k_ime"]) && !empty($_POST["pwd"]) && isset($_POST["pwd"]) && !empty($_POST["ime"]) && isset($_POST["ime"]) && !empty($_POST["prezime"]) && isset($_POST["prezime"]) && !empty($_POST["email"]) && isset($_POST["email"]) && !empty($_POST["tel"]) && isset($_POST["tel"]) && !empty($_POST["jmbg"]) && isset($_POST["jmbg"])){
-	
-$k_ime = test_input($_POST["k_ime"]);
-$sifra = md5(test_input($_POST["pwd"]));
-$ime = test_input($_POST["ime"]);
-$prezime = test_input($_POST["prezime"]);
-$email = test_input($_POST["email"]);
-$broj = test_input($_POST["tel"]);
-$kategorija = test_input($_POST["sel"]);
-$jmbg = test_input($_POST["jmbg"]);
-$optradio = $_POST["optradio"];
+
+$obj1 = new Validation($_POST["k_ime"]);
+$k_ime = $obj1 -> test_input($obj1 -> getData());
+
+$obj2 = new Validation($_POST["pwd"]);
+$sifra = md5($obj2 -> test_input($obj2 -> getData()));
+
+$obj3 = new Validation($_POST["ime"]);
+$ime = $obj3 -> test_input($obj3 -> getData());
+
+$obj4 = new Validation($_POST["prezime"]);
+$prezime = $obj4 -> test_input($obj4 -> getData());
+
+$obj5 = new Validation($_POST["email"]);
+$email = $obj5 -> test_input($obj5 -> getData());
+
+$obj6 = new Validation($_POST["tel"]);
+$broj = $obj6 -> test_input($obj6 -> getData());
+
+$obj7 = new Validation($_POST["sel"]);
+$kategorija = $obj7 -> test_input($obj7 -> getData());
+
+$obj8 = new Validation($_POST["jmbg"]);
+$jmbg = $obj8 -> test_input($obj8 -> getData());
+
+$obj9 = new Validation($_POST["optradio"]);
+$optradio = $obj9 -> test_input($obj9 -> getData());
 
 }
 
 	if(!empty($_POST["adminmodul"]) && $_POST["adminmodul"] == "x"){
-		$adminmodul = test_input($_POST["adminmodul"]);
+		
+		$obj10 = new Validation($_POST["adminmodul"]);
+		$adminmodul = $obj10 -> test_input($obj10 -> getData());
 	}
 	else{
 		$adminmodul = '';
 	}
 
 	if(!empty($_POST["ksluzba"]) && $_POST["ksluzba"] == "x"){
-		$ksluzba = test_input($_POST["ksluzba"]);
+		
+		$obj11 = new Validation($_POST["ksluzba"]);
+		$ksluzba = $obj11 -> test_input($obj11 -> getData());
 	}
 	else{
 		$ksluzba = '';
 	}
 	
 	if(!empty($_POST["esalter"]) && $_POST["esalter"] == "x"){
-		$esalter = test_input($_POST["esalter"]);
+		
+		$obj12 = new Validation($_POST["esalter"]);
+		$ksluzba = $obj12 -> test_input($obj12 -> getData());
 	}
 	else{
 		$esalter = '';
 	}
 	
 	if(!empty($_POST["evidencijaio"]) && $_POST["evidencijaio"] == "x"){
-		$evidencijaio = test_input($_POST["evidencijaio"]);
+		
+		$obj13 = new Validation($_POST["evidencijaio"]);
+		$ksluzba = $obj13 -> test_input($obj13 -> getData());
 	}
 	else{
 		$evidencijaio = '';
 	}
 	
 	if(!empty($_POST["mposlovanje"]) && $_POST["mposlovanje"] == "x"){
-		$mposlovanje = test_input($_POST["mposlovanje"]);
+		
+		$obj14 = new Validation($_POST["mposlovanje"]);
+		$ksluzba = $obj14 -> test_input($obj14 -> getData());
 	}
 	else{
 		$mposlovanje = '';
 	}
 	
 	if(!empty($_POST["emagacin"]) && $_POST["emagacin"] == "x"){
-		$emagacin = test_input($_POST["emagacin"]);
+		
+		$obj15 = new Validation($_POST["emagacin"]);
+		$ksluzba = $obj15 -> test_input($obj15 -> getData());
 	}
 	else{
 		$emagacin = '';
 	}
 	
 	if(!empty($_POST["blagajna"]) && $_POST["blagajna"] == "x"){
-		$blagajna = test_input($_POST["blagajna"]);
+		
+		$obj16 = new Validation($_POST["blagajna"]);
+		$ksluzba = $obj16 -> test_input($obj16 -> getData());
 	}
 	else{
 		$blagajna = '';
 	}
 	
 	if(!empty($_POST["mehanizacija"]) && $_POST["mehanizacija"] == "x"){
-		$mehanizacija = test_input($_POST["mehanizacija"]);
+		
+		$obj17 = new Validation($_POST["mehanizacija"]);
+		$ksluzba = $obj17 -> test_input($obj17 -> getData());
 	}
 	else{
 		$mehanizacija = '';
 	}
 	
 	if(!empty($_POST["ekancelarija"]) && $_POST["ekancelarija"] == "x"){
-		$ekancelarija = test_input($_POST["ekancelarija"]);
+		
+		$obj18 = new Validation($_POST["ekancelarija"]);
+		$ksluzba = $obj18 -> test_input($obj18 -> getData());
 	}
 	else{
 		$ekancelarija = '';
@@ -104,8 +137,8 @@ VALUES('$adminmodul', '$ksluzba', '$esalter', '$evidencijaio', '$mposlovanje', '
 (SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))";
 
 $sql .= "; ".$sqlx1;
-echo "</br>".$sql;
-multi_pristup($servername,$username,$password,$dbname,$sql);
+
+$kon->multi_execute($sql);
 
 }
 

@@ -1,15 +1,23 @@
 <?php
 
-include '../funkcije.php';
+require '../funkcije.php';
 session_start();
 //Install database and it's table appropriately.
+$kon = new SimpleDB("localhost", "root", "", "firma"); 
 
 if(!empty($_POST)){
-	
-$servername = test_input($_POST["ipadresa"]);
-$username = test_input($_POST["base"]);
-$password = test_input($_POST["pwd"]);
-$dbname = test_input($_POST["baza"]);
+
+$obj1 = new Validation($_POST["ipadresa"]);
+$servername = $obj1 -> test_input($obj1 -> getData());
+
+$obj2 = new Validation($_POST["base"]);
+$username = $obj2 -> test_input($obj2 -> getData());
+
+$obj3 = new Validation($_POST["pwd"]);
+$password = $obj3 -> test_input($obj3 -> getData());
+
+$obj4 = new Validation($_POST["baza"]);
+$dbname = $obj4 -> test_input($obj4 -> getData());
 
 $myfile = fopen("config.ini", "w") or die("Unable to open file!");
 //echo fread($myfile,filesize("config.ini"));
@@ -28,28 +36,26 @@ $arr = explode(",",$tekst);
 
 if(!empty($arr)){
 	
-	$servername = test_input($arr[0]);
-	$username = test_input($arr[1]);
-	$password = test_input($arr[2]);
-	$dbname = test_input($arr[3]);
+	$obj5 = new Validation($arr[0]);
+	$obj6 = new Validation($arr[1]);
+	$obj7 = new Validation($arr[2]);
+	$obj8 = new Validation($arr[3]);
+
+	$servername = $obj5 -> test_input($obj5 -> getData());
+	$username = $obj6 -> test_input($obj6 -> getData());
+	$password = $obj7 -> test_input($obj7 -> getData());
+	$dbname = $obj8 -> test_input($obj8 -> getData());
 	
-	$conn=new mysqli($servername, $username, $password, $dbname);
 	
-	if($conn->connect_error){
-	
-		die("Neuspela konekcija: ".$conn->connect_error);
-	
-	}
 	
 	$_SESSION["servername"] = $servername;
 	$_SESSION["username"] = $username;
 	$_SESSION["password"] = $password;
 	$_SESSION["dbname"] = $dbname;
 	
-
-	$conn->close();
-
 	//require 'kreiranje_baze.php'; Ručno se treba kreirati baza.
+		
+		
 		
 		$sql1  = "CREATE TABLE radnik (
 		id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -107,8 +113,9 @@ if(!empty($arr)){
 		
 		
 		$sql = $sql1.";".$sql2.";".$sql3.";".$sql4.";".$sql5.";".$sql6.";".$sql7;
-
-		multi_pristup($servername, $username, $password, $dbname, $sql);	
+		$kon->multi_execute($sql);
+		
+		
 		//header("location: prvi_admin.php");
 }
 
