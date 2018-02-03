@@ -20,7 +20,7 @@ class SimpleDB{
     public function execute($sql_query){
         $result = $this->conn->query($sql_query);
         if ($result == TRUE){
-            echo "Connection success";
+            //echo "Connection success";
         } else {
             echo "Connection fail: " . $conn->error;
         }

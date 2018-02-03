@@ -111,7 +111,6 @@ if(!empty($arr)){
 		FOREIGN KEY (radnik_FK) REFERENCES radnik(id) ON UPDATE CASCADE ON DELETE CASCADE
 		)";//Prvo se kreira polje u tabeli, pa se tek onda veže da bude foreign key.
 		
-		
 		$sql = $sql1.";".$sql2.";".$sql3.";".$sql4.";".$sql5.";".$sql6.";".$sql7;
 		$kon->multi_execute($sql);
 		

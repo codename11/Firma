@@ -55,7 +55,7 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	if(!empty($_POST["esalter"]) && $_POST["esalter"] == "x"){
 		
 		$obj12 = new Validation($_POST["esalter"]);
-		$ksluzba = $obj12 -> test_input($obj12 -> getData());
+		$esalter = $obj12 -> test_input($obj12 -> getData());
 	}
 	else{
 		$esalter = '';
@@ -64,7 +64,7 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	if(!empty($_POST["evidencijaio"]) && $_POST["evidencijaio"] == "x"){
 		
 		$obj13 = new Validation($_POST["evidencijaio"]);
-		$ksluzba = $obj13 -> test_input($obj13 -> getData());
+		$evidencijaio = $obj13 -> test_input($obj13 -> getData());
 	}
 	else{
 		$evidencijaio = '';
@@ -73,7 +73,7 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	if(!empty($_POST["mposlovanje"]) && $_POST["mposlovanje"] == "x"){
 		
 		$obj14 = new Validation($_POST["mposlovanje"]);
-		$ksluzba = $obj14 -> test_input($obj14 -> getData());
+		$mposlovanje = $obj14 -> test_input($obj14 -> getData());
 	}
 	else{
 		$mposlovanje = '';
@@ -82,7 +82,7 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	if(!empty($_POST["emagacin"]) && $_POST["emagacin"] == "x"){
 		
 		$obj15 = new Validation($_POST["emagacin"]);
-		$ksluzba = $obj15 -> test_input($obj15 -> getData());
+		$emagacin = $obj15 -> test_input($obj15 -> getData());
 	}
 	else{
 		$emagacin = '';
@@ -91,7 +91,7 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	if(!empty($_POST["blagajna"]) && $_POST["blagajna"] == "x"){
 		
 		$obj16 = new Validation($_POST["blagajna"]);
-		$ksluzba = $obj16 -> test_input($obj16 -> getData());
+		$blagajna = $obj16 -> test_input($obj16 -> getData());
 	}
 	else{
 		$blagajna = '';
@@ -100,7 +100,7 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	if(!empty($_POST["mehanizacija"]) && $_POST["mehanizacija"] == "x"){
 		
 		$obj17 = new Validation($_POST["mehanizacija"]);
-		$ksluzba = $obj17 -> test_input($obj17 -> getData());
+		$mehanizacija = $obj17 -> test_input($obj17 -> getData());
 	}
 	else{
 		$mehanizacija = '';
@@ -109,7 +109,7 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	if(!empty($_POST["ekancelarija"]) && $_POST["ekancelarija"] == "x"){
 		
 		$obj18 = new Validation($_POST["ekancelarija"]);
-		$ksluzba = $obj18 -> test_input($obj18 -> getData());
+		$ekancelarija = $obj18 -> test_input($obj18 -> getData());
 	}
 	else{
 		$ekancelarija = '';
@@ -136,7 +136,10 @@ VALUES('$adminmodul', '$ksluzba', '$esalter', '$evidencijaio', '$mposlovanje', '
 '$blagajna', '$mehanizacija', '$ekancelarija', 
 (SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))";
 
-$sql .= "; ".$sqlx1;
+$sqlx2 = "INSERT INTO korisnik (korisnicko_ime, sifra, radnik_FK)
+VALUES ('$k_ime', '$sifra', (SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM radnik)))";
+
+$sql .= "; ".$sqlx1."; ".$sqlx2;
 
 $kon->multi_execute($sql);
 

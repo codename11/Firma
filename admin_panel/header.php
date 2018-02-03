@@ -43,7 +43,7 @@ session_start();
         <script src="assets/js/retina-1.1.0.min.js"></script>
         <script src="assets/js/waypoints.min.js"></script>
         <script src="assets/js/scripts.js"></script>
-        
+        <script src="baza/skripta.js"></script>
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->

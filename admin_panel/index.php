@@ -29,7 +29,7 @@ require "navbar.php";
                 </div>
             </div>
         </div>
-		
+		<?php include "baza/modal.php" ?>
 <?php 
 require "footer.php";	
 ?>
