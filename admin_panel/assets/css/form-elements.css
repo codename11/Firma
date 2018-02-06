@@ -1,5 +1,5 @@
 
-input[type="text"], 
+input[type="text"]:not(#username), 
 textarea, 
 textarea.form-control {
 	height: 50px;
@@ -25,7 +25,7 @@ textarea.form-control {
 	line-height: 30px;
 }
 
-input[type="text"]:focus, 
+input[type="text"]:focus:not(#username), 
 textarea:focus, 
 textarea.form-control:focus {
 	outline: 0;

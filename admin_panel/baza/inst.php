@@ -60,7 +60,7 @@ if(!empty($arr)){
 		$sql1  = "CREATE TABLE radnik (
 		id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		k_ime VARCHAR(30) NOT NULL, 
-		sifra VARCHAR(30) NOT NULL, 
+		sifra VARCHAR(255) NOT NULL, 
 		ime VARCHAR(30) NOT NULL,
 		prezime VARCHAR(30) NOT NULL,
 		email VARCHAR(30) NOT NULL,
@@ -71,7 +71,7 @@ if(!empty($arr)){
 		$sql2 = "CREATE TABLE korisnik (
 		id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 		korisnicko_ime VARCHAR(30) NOT NULL,
-		sifra VARCHAR(30) NOT NULL,
+		sifra VARCHAR(255) NOT NULL,
 		radnik_FK INT(10) UNSIGNED,
 		FOREIGN KEY (radnik_FK) REFERENCES radnik(id) ON UPDATE CASCADE ON DELETE CASCADE
 		)";

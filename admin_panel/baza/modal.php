@@ -13,16 +13,16 @@
 			<form id="login" action="">
 			
 				<div class="form-group">
-					<label for="email">Username:</label>
-					<input type="text" class="form-control" id="username">
+					<label for="username">Korisničko ime:</label>
+					<input type="text" name="username" class="form-control" id="username">
 				</div>
 				
 				<div class="form-group">
-					<label for="pwd">Password:</label>
-					<input type="password" class="form-control" id="pwd">
+					<label for="pwd">Šifra:</label>
+					<input type="password" name="pwd" class="form-control" id="pwd">
 				</div>	
 			
-			<button type="submit" id="logbtn" class="btn btn-default">Submit</button>
+			<button type="submit" id="logbtn" class="btn btn-default">Pošalji</button>
 			</form>
 			
         </div>
