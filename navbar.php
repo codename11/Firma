@@ -12,7 +12,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="top-navbar-1">
 					<ul class="nav navbar-nav">
-						<li><a class="btn btn-basic" href="index.php"><img src="assets/img/logoTop.png" alt="TOP" style="margin-right: 0; margin-bottom: 5px; border: 1px solid white; border-radius: 50%;"></a></li>
+						<li><a class="btn btn-basic" href="index.php"><img src="/www/knjigovodstvo/assets/img/logoTop.png" alt="TOP" style="margin-right: 0; margin-bottom: 5px; border: 1px solid white; border-radius: 50%;"></a></li>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">Admin</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">Kadrovska</br>služba</a></li>
 						<li><a href="#" data-toggle="modal" data-target="#myModal">E-šalter</a></li>

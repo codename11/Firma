@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-	var url1 = "inst.php";
+	var url1 = "/www/knjigovodstvo/install/inst.php";
 	$("#dform").submit(function() {
 		
 		$.ajax({
@@ -10,14 +10,14 @@ $(document).ready(function(){
 		data : $("#dform").serialize(),
 		success: function(data){
 					alert("Success");
-					location.replace("prvi_admin.php");
+					location.replace("/www/knjigovodstvo/install/prvi_admin.php");
 				}
 		});
 
 		
 	});
 
-	var url2 = "adminV1.php";
+	var url2 = "/www/knjigovodstvo/install/adminV1.php";
 	$("#forma").submit(function() {
 		
 		$.ajax({
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		data : $("#forma").serialize(),
 		success: function(data){
 					alert("Success");
-					location.replace("../index.php");
+					location.replace("/www/knjigovodstvo/index.php");
 				}
 		});
 
@@ -34,7 +34,7 @@ $(document).ready(function(){
 	});
 	
 		
-	var url3 = "baza/modalLogIn.php";
+	var url3 = "/www/knjigovodstvo/modalLogIn.php";
 	$("#login").submit(function(e) {
 		
 		$.ajax({
@@ -43,7 +43,7 @@ $(document).ready(function(){
 		data : $("#login").serialize(),
 		success: function(data){
 					alert("Success");
-					location.replace("baza/admin.php");
+					location.replace("/www/knjigovodstvo/admin_panel/provera_admin.php");
 				}
 		});
 

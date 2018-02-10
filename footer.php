@@ -6,7 +6,7 @@
                     <div class="col-sm-6 footer-left">
                     	<h3>Kontaktirajte nas:</h3>
                     	<div class="contact-form">
-                    		<form role="form" action="assets/contact.php" method="post">
+                    		<form role="form" action="/www/knjigovodstvo/assets/contact.php" method="post">
 		                    	<div class="form-group">
 		                    		<label class="sr-only" for="contact-email">Email</label>
 		                        	<input type="text" name="email" placeholder="Email..." class="contact-email form-control" id="contact-email">

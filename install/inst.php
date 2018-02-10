@@ -113,9 +113,7 @@ if(!empty($arr)){
 		
 		$sql = $sql1.";".$sql2.";".$sql3.";".$sql4.";".$sql5.";".$sql6.";".$sql7;
 		$kon->multi_execute($sql);
-		
-		
-		//header("location: prvi_admin.php");
+
 }
 
 ?>

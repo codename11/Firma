@@ -1,11 +1,13 @@
 <?php 
 
-require "header.php";
-require "navbar.php";
+require "../header.php";
+require "../navbar.php";
 
 ?>
 
-     <!-- Top content -->
+
+
+<!-- Top content -->
         <div class="top-content">
         	
             <div class="inner-bg">
@@ -13,9 +15,7 @@ require "navbar.php";
                 	
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                        	<div class="logo wow fadeInDown">
-                        		<a href="index.php"></a>
-                        	</div>
+                        	
                             <h1 class="wow fadeInLeftBig">Firma</h1>
                             <div class="description wow fadeInLeftBig">
                             	<p>
@@ -29,7 +29,5 @@ require "navbar.php";
                 </div>
             </div>
         </div>
-		<?php include "baza/modal.php" ?>
-<?php 
-require "footer.php";	
-?>
+
+<?php require "../footer.php" ?>

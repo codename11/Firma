@@ -69,5 +69,9 @@ class Validation{
 		return $par;
 	}
 	
+	function isEmail($par) {
+		return filter_var($par, FILTER_VALIDATE_EMAIL);
+	}
+	
 }
 ?>
