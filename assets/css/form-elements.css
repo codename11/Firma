@@ -1,5 +1,5 @@
 
-input[type="text"]:not(#username), 
+input[type="text"]:not(#username):not(#cont):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#tel):not(#jmbg), 
 textarea, 
 textarea.form-control {
 	height: 50px;
@@ -25,6 +25,28 @@ textarea.form-control {
 	line-height: 30px;
 }
 
+div#zr,div#fr,div#sr,div#tr{
+	    text-align: left;		
+}
+
+#btn1{
+	margin-bottom: 5%;
+}
+
+@media screen and (max-width: 1920px) and (min-width: 700px) {
+    #cont{
+	padding-top: 6%;
+}
+}
+
+@media screen and (max-width: 1000px) and (min-width: 320px){
+    #cont{ 
+		padding-top: 19%;
+	}
+}
+
+
+
 input[type="text"]:focus:not(#username), 
 textarea:focus, 
 textarea.form-control:focus {
@@ -37,8 +59,6 @@ textarea.form-control:focus {
 input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #ddd; }
 input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #ddd; }
 input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #ddd; }
-
-
 
 button.btn {
 	height: 50px;

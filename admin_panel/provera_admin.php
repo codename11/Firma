@@ -5,7 +5,7 @@ session_start();
 
 $kon = new SimpleDB("localhost", "root", "", "firma"); 
 $Admin_modul='x';
-$sql = "SELECT korisnicko_ime, sifra FROM korisnik, moduli WHERE korisnik.id=moduli.id AND moduli.Admin_modul='$Admin_modul'";
+$sql = "SELECT korisnicko_ime, sifra FROM korisnik, moduli WHERE korisnik.id=moduli.radnik_FK AND moduli.Admin_modul='$Admin_modul'";
 
 $result = $kon->execute($sql);
 $num = 0;
