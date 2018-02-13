@@ -6,7 +6,7 @@ textarea.form-control {
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #666;
+    background: #red;
     border: 2px solid #666;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
@@ -29,25 +29,14 @@ div#zr,div#fr,div#sr,div#tr{
 	    text-align: left;		
 }
 
+input[name="optradio"],input[name="adminmodul"],input[name="ksluzba"],input[name="esalter"],input[name="evidencijaio"],input[name="mposlovanje"],input[name="emagacin"],input[name="blagajna"],input[name="mehanizacija"],input[name="ekancelarija"]{
+	margin-top: 8px;
+}
 #btn1{
 	margin-bottom: 5%;
 }
 
-@media screen and (max-width: 1920px) and (min-width: 700px) {
-    #cont{
-	padding-top: 6%;
-}
-}
-
-@media screen and (max-width: 1000px) and (min-width: 320px){
-    #cont{ 
-		padding-top: 19%;
-	}
-}
-
-
-
-input[type="text"]:focus:not(#username), 
+input[type="text"]:focus:not(#username):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#sel):not(#jmbg), 
 textarea:focus, 
 textarea.form-control:focus {
 	outline: 0;

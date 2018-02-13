@@ -1,7 +1,6 @@
 <?php 
 include '../funkcije.php';
 session_start();
-$kon = new SimpleDB("localhost", "root", "", "firma"); 
 
 if(!empty($_POST) && isset($_POST) && !empty($_POST["k_ime"]) && isset($_POST["k_ime"]) && !empty($_POST["pwd"]) && isset($_POST["pwd"]) && !empty($_POST["ime"]) && isset($_POST["ime"]) && !empty($_POST["prezime"]) && isset($_POST["prezime"]) && !empty($_POST["email"]) && isset($_POST["email"]) && !empty($_POST["tel"]) && isset($_POST["tel"]) && !empty($_POST["jmbg"]) && isset($_POST["jmbg"])){
 
@@ -117,12 +116,22 @@ $optradio = $obj9 -> test_input($obj9 -> getData());
 	
 //Razlika je samo sto moj server nema šifru, odnosno !empty($_SESSION["password"]) mora biti true jer je šifra prazan string.
 //if(!empty($_SESSION) && isset($_SESSION) && !empty($_SESSION["servername"]) && isset($_SESSION["servername"]) && !empty($_SESSION["username"]) && isset($_SESSION["username"]) && !empty($_SESSION["password"]) && isset($_SESSION["password"]) && !empty($_SESSION["dbname"]) && isset($_SESSION["dbname"])){
-if(!empty($_SESSION) && isset($_SESSION) && !empty($_SESSION["servername"]) && isset($_SESSION["servername"]) && !empty($_SESSION["username"]) && isset($_SESSION["username"]) && isset($_SESSION["password"]) && !empty($_SESSION["dbname"]) && isset($_SESSION["dbname"])){
+
+if(!empty($_POST) && isset($_POST) && !empty($_POST["servername"]) && isset($_POST["servername"]) && !empty($_POST["username"]) && isset($_POST["username"]) && isset($_POST["password"]) && !empty($_POST["dbname"]) && isset($_POST["dbname"])){
 	
-$servername = $_SESSION["servername"];
-$username = $_SESSION["username"];
-$password = $_SESSION["password"];
-$dbname = $_SESSION["dbname"];
+	$servername = $_POST["servername"];
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+	$dbname = $_POST["dbname"];
+}
+else{
+	$servername = "127.0.0.1";
+	$username = "root";
+	$password = "";
+	$dbname = "firma";
+}
+
+$kon = new SimpleDB($servername, $username, $password, $dbname); 
 
 $sql="INSERT INTO radnik (k_ime, sifra, ime, prezime, email, JMBG, nivo)
 VALUES ('$k_ime', '$sifra', '$ime', '$prezime', '$email', '$jmbg', '$optradio');
@@ -142,7 +151,5 @@ VALUES ('$k_ime', '$sifra', (SELECT id FROM radnik WHERE id=(SELECT MAX(id) FROM
 $sql .= "; ".$sqlx1."; ".$sqlx2;
 
 $kon->multi_execute($sql);
-
-}
 
 ?>

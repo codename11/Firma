@@ -12,7 +12,7 @@ $num = 0;
 
 	while($row = $result->fetch_assoc()){
 		$num++;
-		if(($_SESSION["username"] != $row["korisnicko_ime"]) && (md5($_SESSION["pwd"]) != $row["sifra"]) && $Admin_modul != 'x'){
+		if(($_POST["username"] != $row["korisnicko_ime"]) && (md5($_POST["pwd"]) != $row["sifra"]) && $Admin_modul != 'x'){
 			
 			header( "Location: ../index.php" );
 		}

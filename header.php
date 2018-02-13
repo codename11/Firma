@@ -16,10 +16,10 @@ session_start();
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600">        
         <link rel="stylesheet" href="/www/knjigovodstvo/assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/www/knjigovodstvo/assets/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/www/knjigovodstvo/assets/css/animate.css">
+        <link rel="stylesheet" href="/www/knjigovodstvo/assets/css/media-queries.css">
+		<link rel="stylesheet" href="/www/knjigovodstvo/assets/css/animate.css">
 		<link rel="stylesheet" href="/www/knjigovodstvo/assets/css/form-elements.css">
         <link rel="stylesheet" href="/www/knjigovodstvo/assets/css/style.css">
-        <link rel="stylesheet" href="/www/knjigovodstvo/assets/css/media-queries.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
