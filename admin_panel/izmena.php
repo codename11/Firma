@@ -6,8 +6,6 @@ require "../header.php";
 <div class="container" id="cont">
 	<?php 
 		require "subnav.php";
-		require "/xampp/htdocs/www/knjigovodstvo/admin_panel/adm.php"; 
+		require "/xampp/htdocs/www/knjigovodstvo/admin_panel/izvestaj.php";
 	?>			
-	<span id="dmx"></span>
 </div>
-

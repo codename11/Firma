@@ -43,7 +43,7 @@ session_start();
         <script src="/www/knjigovodstvo/assets/js/retina-1.1.0.min.js"></script>
         <script src="/www/knjigovodstvo/assets/js/waypoints.min.js"></script>
         <script src="/www/knjigovodstvo/assets/js/scripts.js"></script>
-        <script src="/www/knjigovodstvo/assets/js/skripta.js"></script>
+   
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
