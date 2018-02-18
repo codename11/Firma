@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
 		data : $("#login").serialize(),
 		success: function(data){
 					alert("Success");
-					location.replace("/www/knjigovodstvo/admin_panel/provera_admin.php");
+					location.replace("/www/knjigovodstvo/admin_panel/admin.php");
 				}
 		});
 
@@ -128,18 +128,21 @@ jQuery(document).ready(function() {
 	    });
 	});
 
-	 $(function(){ //Odavde
-  var current_page_URL = location.href;
-  $( "a" ).each(function() {
-     if ($(this).attr("href") !== "#") {
-       var target_URL = $(this).prop("href");
-       if (target_URL == current_page_URL) {
-          $('.nav a').parents('li, ul').removeClass('active');
-          $(this).parent('li').addClass('active');
-          return false;
-       }
-     }
-  });
+$(function(){ //Odavde
+	var current_page_URL = location.href;
+		$( "a" ).each(function() {
+			if ($(this).attr("href") !== "#") {
+					
+			var target_URL = $(this).prop("href");
+					
+				if (target_URL == current_page_URL) {
+					$('.nav a').parents('li, ul').removeClass('active');
+					$(this).parent('li').addClass('active');
+					return false;
+				}
+					
+			}
+	});
 }); //dovde je kod za setovanje 'active' klase navbar-a kada se promeni stranica.
 	
 	

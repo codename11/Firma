@@ -10,7 +10,7 @@
           <h4 class="modal-title">Log In</h4>
         </div>
         <div class="modal-body">
-			<form id="login" action="">
+			<form id="login">
 			
 				<div class="form-group">
 					<label for="username">Korisničko ime:</label>

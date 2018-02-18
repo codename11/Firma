@@ -621,3 +621,44 @@ footer h3 {
 }
 
 .footer-bottom a:hover, .footer-bottom a:focus { color: #888; }
+
+.bkfoot{
+padding-top: 20px;
+width: 100%;
+border-top: 3px solid #b3b3b3;
+background-color: #999999;
+
+}
+
+.alt_footer{
+font-size:120%;
+font-family:Palatino Linotype;
+color: white;	
+background-color: #999999;
+font-weight: bold;
+}
+
+.lt, .rt{
+display: inline;
+}
+
+.lt{
+	float: left;
+}
+
+.rt{
+	float: right;
+}
+
+.podaci{
+font-family:Palatino Linotype;
+color: white;	
+}
+
+html, body, #top-content1{
+	height: 100%; width: 100%;
+}
+
+.tabovi{
+	margin-bottom: 1%; border-bottom: 3px solid white;
+}
