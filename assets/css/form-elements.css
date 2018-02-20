@@ -26,7 +26,12 @@ textarea.form-control {
 }
 
 div#zr,div#fr,div#sr,div#tr{
-	    text-align: left;		
+	text-align: left;		
+}
+
+#kme{
+	
+	line-height: 93.5%;;
 }
 
 input[name="optradio"],input[name="adminmodul"],input[name="ksluzba"],input[name="esalter"],input[name="evidencijaio"],input[name="mposlovanje"],input[name="emagacin"],input[name="blagajna"],input[name="mehanizacija"],input[name="ekancelarija"]{
@@ -49,7 +54,7 @@ input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-co
 input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #ddd; }
 input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #ddd; }
 
-button.btn {
+button.btn:not(.bla) {
 	height: 50px;
     margin: 0;
     padding: 0 40px;
@@ -75,6 +80,15 @@ button.btn {
     text-shadow: none;
     -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+.bla{
+	
+	font-family:Palatino Linotype;
+	
+}
+
+.table-hover tbody tr:hover td{
+	background-color: #ffa500;         
 }
 
 button.btn:hover, button.btn:active, button.btn:focus, 

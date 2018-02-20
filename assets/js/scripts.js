@@ -2,7 +2,7 @@
 function scroll_to(clicked_link, nav_height) {
 	var element_class = clicked_link.attr('href').replace('#', '.');
 	var scroll_to = 0;
-	if(element_class != '.top-content') {
+	if(element_class != '.top-content' && element_class != '#myModal1') {
 		element_class += '-container';
 		scroll_to = $(element_class).offset().top - nav_height;
 	}
@@ -57,6 +57,23 @@ jQuery(document).ready(function() {
 		success: function(data){
 					alert("Success");
 					location.replace("/www/knjigovodstvo/admin_panel/admin.php");
+				}
+		});
+
+		
+	});
+	
+	
+	var url4 = "/www/knjigovodstvo/install/adminV1.php";
+	$("#forma1").submit(function() {
+		
+		$.ajax({
+		type : "POST",
+		url : url4,
+		data : $("#forma1").serialize(),
+		success: function(data){
+					alert("Success");
+					//location.replace("/www/knjigovodstvo/admin_panel/admin.php");
 				}
 		});
 
@@ -163,4 +180,72 @@ jQuery(window).load(function() {
 	$(".testimonial-image img").attr("style", "width: auto !important; height: auto !important;");
 	
 });
+
+var bx1=1;
+var bx2=2;
+function uzim_vred(phpdoc){
+	
+	if(bx1>1 && bx2>2){
+		bx1=1;
+		bx2=2;
+	}
+	var str = "";
+	var srt = "";
+	
+	var k_ime = document.getElementById("k_ime").value;
+	var pwd = document.getElementById("pwd").value;
+	var ime = document.getElementById("ime").value;
+	var prezime =  document.getElementById("prezime").value;
+	var email = document.getElementById("email").value;
+	var tel = document.getElementById("tel").value;
+	var sel = document.getElementById("sel").value;
+	var jmbg =  document.getElementById("jmbg").value;
+	
+	var sort =  document.getElementById("sort");
+	
+
+	if(sort===undefined || sort===null){
+		
+		str=k_ime+","+pwd+","+ime+","+prezime+","+email+","+tel+","+sel+","+jmbg;
+		console.log('ne postoji!');
+	}
+	else if(sort!=undefined || sort!=null){
+		var srt =  sort.value;
+		str=k_ime+","+pwd+","+ime+","+prezime+","+email+","+tel+","+sel+","+jmbg+","+srt;
+		console.log('postoji!');
+		
+	}
+alert(str);
+	/*if (str.length == 0 &&(document.getElementById("raport")!=undefined || document.getElementById("raport")!=null)) { 
+		document.getElementById("raport").innerHTML = "";
+		return;
+	}*/
+	
+
+		
+		var xhttp = new XMLHttpRequest();
+	
+		xhttp.onreadystatechange = function() {
+    
+			if((document.getElementById("raport")!=undefined || document.getElementById("raport")!=null) && this.readyState == 4 && this.status == 200){
+				document.getElementById("raport").innerHTML = this.responseText;
+			}
+	 
+		};
+ 
+		if(srt == ""){
+			xhttp.open("GET", phpdoc+"?k_ime="+k_ime+"&pwd="+pwd+"&ime="+ime+"&prezime="+prezime+"&email="+email+"&tel="+tel+"&sel="+sel+"&jmbg="+jmbg, false);
+		}
+ 
+		if(srt != ""){
+			xhttp.open("GET", phpdoc+"?k_ime="+k_ime+"&pwd="+pwd+"&ime="+ime+"&prezime="+prezime+"&email="+email+"&tel="+tel+"&sel="+sel+"&jmbg="+jmbg+"&srt="+srt, false);
+		}
+			
+		xhttp.send();
+		
+	
+	
+
+	
+}
 

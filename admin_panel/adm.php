@@ -1,131 +1,49 @@
+<?php 
 
-  <form id="forma">
+require "../header.php";
+require_once ("../funkcije.php");
 
-	<div class="form-group">
-		<label for="k_ime">Korisničko ime:</label>
-		<input type="text" class="form-control" id="k_ime" maxlength="30" placeholder="Unesi korisničko ime:" name="k_ime" value="" required>
-    </div>
-	
-	<div class="form-group">
-		<label for="pwd">Šifra:</label>
-		<input type="password" class="form-control" id="pwd" maxlength="30" placeholder="Unesi željenu šifru" name="pwd" value="" required>
-    </div>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "firma";
 
-	<div class="form-group">
-		<label for="ime">Ime:</label>
-		<input type="text" class="form-control" id="ime" maxlength="30" placeholder="Unesi ime:" name="ime" value="" required>
-    </div>
-	
-	<div class="form-group">
-		<label for="prezime">Prezime:</label>
-		<input type="text" class="form-control" id="prezime" maxlength="30" placeholder="Unesi prezime:" name="prezime" value="" required>
-    </div>
-	
-	<div class="form-group">
-		<label for="email">Email:</label>
-		<input type="email" class="form-control" id="email" maxlength="30" placeholder="Unesi email:" name="email" value="" required>
-    </div>
-	
-	<div class="form-group row">
-		<div class="col-sm-10">
-			<label for="tel">Telefon:</label>
-			<input type="number" class="form-control" id="tel" maxlength="10" placeholder="Unesi telefon:" name="tel" value="" required>
-		</div>
-		
-		<?php require "/xampp/htdocs/www/knjigovodstvo/install/kategorije_options.php"; ?>
-		
-	</div>
-	<div class="form-group">
-		<label for="jmbg">JMBG:</label>
-		<input type="number" class="form-control" id="jmbg" maxlength="14" placeholder="Unesi jmbg:" name="jmbg" value="" required>
-    </div>
-	
-	<div class="row" id="zr">
-		<div class="radio" style="padding-left: 15px">
-			<label><input type="radio" id="optradio1" name="optradio" value="admin">Admin</label>
-		</div>
-		
-		<div class="radio" style="padding-left: 15px">
-			<label><input type="radio" id="optradio2" name="optradio" value="user">User</label>
-		</div>
-	</div>
-	<div class="row" id="fr">
-	
-		<div class="col-sm-4" id="adminmodul">
-			<label class="checkbox-inline">
-			  <input type="checkbox" name="adminmodul" value="x">Admin modul
-			</label>
-		</div>	
-		
-		<div class="col-sm-4" id="ksluzba">
-			<label class="checkbox-inline">
-			  <input type="checkbox" name="ksluzba" value="x">Kadrovska služba
-			</label>
-		</div>
-		
-		<div class="col-sm-4" id="esalter">	
-			<label class="checkbox-inline">
-			  <input type="checkbox" name="esalter" value="x">E-šalter
-			</label>
-		</div>
-	</div></br>
-	
-	<div class="row" id="sr">
-	
-		<div class="col-sm-4" id="evidencijaio">	
-			<label class="checkbox-inline">
-				<input type="checkbox" name="evidencijaio" value="x">Evidencija ulaza/izlaza
-			</label>
-		</div>
-			
-		<div class="col-sm-4" id="mposlovanje">	
-			<label class="checkbox-inline">
-				<input type="checkbox" name="mposlovanje" value="x">Materijalno poslovanje
-			</label>
-		</div>
-			
-		<div class="col-sm-4" id="emagacin">	
-			<label class="checkbox-inline">
-			  <input type="checkbox" name="emagacin" value="x">E-magacin
-			</label>
-		</div>	
-	</div></br>
-		
-		
-	<div class="row" id="tr">
-	
-		<div class="col-sm-4" id="blagajna">	
-			<label class="checkbox-inline">
-				<input type="checkbox" name="blagajna" value="x">Blagajna
-			</label>
-		</div>
-		
-		<div class="col-sm-4" id="mehanizacija">	
-			<label class="checkbox-inline">
-				<input type="checkbox" name="mehanizacija" value="x">Mehanizacija
-			</label>
-		</div>
-		
-		<div class="col-sm-4" id="ekancelarija">	
-			<label class="checkbox-inline">
-				<input type="checkbox" name="ekancelarija" value="x">E-kancelarija
-			</label>
-		</div>
-	</div>
+$confirm = 1;
 
+if(!empty($_SESSION["username"]) && isset($_SESSION["username"]) && !empty($_SESSION["pwd"]) && isset($_SESSION["pwd"])){
+	$obj1 = new Validation($_SESSION["username"]);
+	$obj2 = new Validation($_SESSION["pwd"]);
+
+	$user = $obj1 -> test_input($obj1 -> getData());
+	$pwd = $obj2 -> test_input($obj2 -> getData());
 	
+	$kon = new SimpleDB($servername, $username, $password, $dbname);
+
+	$Admin_modul='x';
+	$sql = "SELECT korisnicko_ime, sifra FROM korisnik, moduli WHERE korisnik.id=moduli.radnik_FK AND moduli.Admin_modul='$Admin_modul'";
+
+	$result = $kon->execute($sql);
+	$num = 0;
+
+		while($row = $result->fetch_assoc()){
+			$num++;
+			if(($user != $row["korisnicko_ime"]) && (md5($pwd) != $row["sifra"]) && $Admin_modul != 'x'){
+				
+				$confirm = 0;
+				
+			}
+			else{
+				
+				$confirm = 1;
+				
+			}
+			$_SESSION["confirm"]=$confirm;
+		}
+	}
 	
-	<div class="row">
-	
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4"><button id="btn1" type="submit" class="btn btn-default" style="margin-top: 1%">Submit</button></div>
-		<div class="col-sm-4"></div>
-	
-	</div>
-	
-	
-	
-  </form>
-  
-</div>
-<div id="demo"></div>
+	if($confirm == 0){
+		header('Location: /xampp/htdocs/www/knjigovodstvo/index.php');
+		
+	}
+		
+?>

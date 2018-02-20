@@ -3,6 +3,7 @@ session_start();
 require "header.php";
 require "navbar.php";
 
+
 ?>
 
      <!-- Top content -->
@@ -30,7 +31,11 @@ require "navbar.php";
             </div>
         </div>
 
-		<?php include "modal.php" ?>
+		<?php include "modal.php";
+		
+
+		
+		?>
 <?php 
 require "footer.php";	
 ?>

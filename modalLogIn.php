@@ -7,7 +7,7 @@ $username = "root";
 $password = "";
 $dbname = "firma";
 
-
+$confirm = true;
 
 if(!empty($_POST["username"]) && isset($_POST["username"]) && !empty($_POST["pwd"]) && isset($_POST["pwd"])){
 	$obj1 = new Validation($_POST["username"]);
@@ -28,17 +28,20 @@ if(!empty($_POST["username"]) && isset($_POST["username"]) && !empty($_POST["pwd
 			$num++;
 			if(($user != $row["korisnicko_ime"]) && (md5($pwd) != $row["sifra"]) && $Admin_modul != 'x'){
 				
-				header('Location: /www/knjigovodstvo/index.php');
+				$confirm = false;
 			}
 			else{
+				$confirm = true;
 				$_SESSION["username"] = $user;
-				$_SESSION["pwd"] = $pwd;
+				$_SESSION["pwd"] = md5($pwd);
 			
 			}
-
+			$_SESSION["confirm"]=$confirm;
 		}
 	}
-
-
-
+	
+	if($confirm == false){
+		header('Location: /xampp/htdocs/www/knjigovodstvo/index.php');
+	}
+	
 ?>

@@ -167,7 +167,6 @@ img { max-width: 100%; }
 .btn-link-2:hover, .btn-link-2:focus, 
 .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #fff; }
 
-
 /***** Divider *****/
 
 .divider-1 span {
@@ -225,16 +224,16 @@ ul.navbar-nav {
     padding: 210px 0;
 }
 
-.top-content .text {
+.top-content .text :not(#myModal1){
 	color: #fff;
 }
 
-.top-content .text .logo {
+.top-content .text .logo :not(#myModal1){
 	padding-bottom: 0px;
 
 }
 
-.top-content .text .logo a {
+.top-content .text .logo a :not(#myModal1){
 	display: inline-block;
 	width: 130px;
 	height: 69px;
@@ -243,18 +242,18 @@ ul.navbar-nav {
 	border-radius: 45px;
 }
 
-.top-content .text h1 {
+.top-content .text h1 :not(#myMydal1){
 	margin-top: 25px;
 	color: #fff;
 }
 
-.top-content .description {
+.top-content .description :not(#myModal1){
 	margin: 30px 0 10px 0;
 }
 
-.top-content .description p { opacity: 0.8; }
+.top-content .description p :not(#myModal1){ opacity: 0.8; }
 
-.top-content .top-big-link {
+.top-content .top-big-link :not(#myModal1){
 	margin-top: 45px;
 }
 
@@ -657,6 +656,7 @@ color: white;
 
 html, body, #top-content1{
 	height: 100%; width: 100%;
+	background-image: url("1.jpg");
 }
 
 .tabovi{
