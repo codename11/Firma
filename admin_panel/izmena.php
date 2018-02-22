@@ -66,7 +66,7 @@ require "adm.php";
 				
 			
 		</div>
-			<button type="button" style="margin-top: 10px" class="btn btn-default" onclick="uzim_vred('izvestaj.php',$(this).parent().attr('id'))">Pošalji</button>
+			<button type="button" style="margin-top: 10px" class="btn btn-default" onclick="uzim_vred('izvestaj.php',this)">Pošalji</button>
 			
 			
 		</form>

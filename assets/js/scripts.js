@@ -181,28 +181,34 @@ jQuery(window).load(function() {
 	
 });
 
-function uzim_vred(phpdoc,parent_id){
+function uzim_vred(phpdoc,me){
 	
+	var parent_id = me.parentNode.id
 	var name = "";
 	var val = "";
 	var str = phpdoc+"?,";
-	var len = ($("#"+parent_id+" [name]").length);
 	var i = 0;
-	
-	$("#"+parent_id+" [name]").each(function(){
 		
-		i++;
-		name = $(this).attr('name');
-		val = $(this).val();
-
+	var net = document.getElementById(parent_id).querySelectorAll("#"+parent_id+" [name]");
+	var len = document.getElementById(parent_id).length-1;
+		
+	var namex = "";
+	var valx = "";
+		
+	while(i<len) {
+			
+		name = net[i].getAttribute("name");
+		val = net[i].value;
+		   
+		i++
 		str += name+"="+val;
-		
+			
 		if(i<len){
 			str += "&,"
 		}
-	
-	});
-	
+			
+	}
+		
 	i = 0;
 	var elems = str.split(",");
 
@@ -211,20 +217,20 @@ function uzim_vred(phpdoc,parent_id){
 		str += elems[i];
 		i++
 	}
+	str = encodeURI(str);
 	
-	
-		var xhttp = new XMLHttpRequest();
-	
-		xhttp.onreadystatechange = function() {
-    
-			if((document.getElementById("raport")!=undefined || document.getElementById("raport")!=null) && this.readyState == 4 && this.status == 200){
-				document.getElementById("raport").innerHTML = this.responseText;
-			}
-	 
-		};
+	var xhttp = new XMLHttpRequest();
+		
+	xhttp.onreadystatechange = function() {
+		
+		if((document.getElementById("raport")!=undefined || document.getElementById("raport")!=null) && this.readyState == 4 && this.status == 200){
+			document.getElementById("raport").innerHTML = this.responseText;
+		}
+		 
+	};
 
-		xhttp.open("GET", str, false);		
-		xhttp.send();
+	xhttp.open("GET", str, false);		
+	xhttp.send();
 	
 }
 
