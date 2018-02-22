@@ -181,48 +181,38 @@ jQuery(window).load(function() {
 	
 });
 
-var bx1=1;
-var bx2=2;
-function uzim_vred(phpdoc){
+function uzim_vred(phpdoc,parent_id){
 	
-	if(bx1>1 && bx2>2){
-		bx1=1;
-		bx2=2;
-	}
-	var str = "";
-	var srt = "";
+	var name = "";
+	var val = "";
+	var str = phpdoc+"?,";
+	var len = ($("#"+parent_id+" [name]").length);
+	var i = 0;
 	
-	var k_ime = document.getElementById("k_ime").value;
-	var pwd = document.getElementById("pwd").value;
-	var ime = document.getElementById("ime").value;
-	var prezime =  document.getElementById("prezime").value;
-	var email = document.getElementById("email").value;
-	var tel = document.getElementById("tel").value;
-	var sel = document.getElementById("sel").value;
-	var jmbg =  document.getElementById("jmbg").value;
-	
-	var sort =  document.getElementById("sort");
-	
+	$("#"+parent_id+" [name]").each(function(){
+		
+		i++;
+		name = $(this).attr('name');
+		val = $(this).val();
 
-	if(sort===undefined || sort===null){
+		str += name+"="+val;
 		
-		str=k_ime+","+pwd+","+ime+","+prezime+","+email+","+tel+","+sel+","+jmbg;
-		console.log('ne postoji!');
-	}
-	else if(sort!=undefined || sort!=null){
-		var srt =  sort.value;
-		str=k_ime+","+pwd+","+ime+","+prezime+","+email+","+tel+","+sel+","+jmbg+","+srt;
-		console.log('postoji!');
-		
-	}
-alert(str);
-	/*if (str.length == 0 &&(document.getElementById("raport")!=undefined || document.getElementById("raport")!=null)) { 
-		document.getElementById("raport").innerHTML = "";
-		return;
-	}*/
+		if(i<len){
+			str += "&,"
+		}
 	
+	});
+	
+	i = 0;
+	var elems = str.split(",");
 
-		
+	str = "";
+	while(i<=len){
+		str += elems[i];
+		i++
+	}
+	
+	
 		var xhttp = new XMLHttpRequest();
 	
 		xhttp.onreadystatechange = function() {
@@ -232,20 +222,9 @@ alert(str);
 			}
 	 
 		};
- 
-		if(srt == ""){
-			xhttp.open("GET", phpdoc+"?k_ime="+k_ime+"&pwd="+pwd+"&ime="+ime+"&prezime="+prezime+"&email="+email+"&tel="+tel+"&sel="+sel+"&jmbg="+jmbg, false);
-		}
- 
-		if(srt != ""){
-			xhttp.open("GET", phpdoc+"?k_ime="+k_ime+"&pwd="+pwd+"&ime="+ime+"&prezime="+prezime+"&email="+email+"&tel="+tel+"&sel="+sel+"&jmbg="+jmbg+"&srt="+srt, false);
-		}
-			
-		xhttp.send();
-		
-	
-	
 
+		xhttp.open("GET", str, false);		
+		xhttp.send();
 	
 }
 

@@ -29,11 +29,6 @@ div#zr,div#fr,div#sr,div#tr{
 	text-align: left;		
 }
 
-#kme{
-	
-	line-height: 93.5%;;
-}
-
 input[name="optradio"],input[name="adminmodul"],input[name="ksluzba"],input[name="esalter"],input[name="evidencijaio"],input[name="mposlovanje"],input[name="emagacin"],input[name="blagajna"],input[name="mehanizacija"],input[name="ekancelarija"]{
 	margin-top: 8px;
 }

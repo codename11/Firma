@@ -10,10 +10,10 @@ require "adm.php";
 
 		<form id="F2" class="vcenter" autocomplete="on">
 
-			<div class="row" id="aps">
+			<div class="row">
 
 				<div class="form-group col-sm-2">
-					<label for="k_ime" id="kme">Korisničko ime:</label>
+					<label for="k_ime" style="line-height: 93.5%;">Korisničko ime:</label>
 					<input type="text" class="form-control" id="k_ime" maxlength="30" placeholder="Unesi korisničko ime:" name="k_ime" value="" required>
 				</div>
 				
@@ -66,7 +66,7 @@ require "adm.php";
 				
 			
 		</div>
-			<button type="button" id="submit1" style="margin-top: 10px" name="submit" class="btn btn-default" onclick="uzim_vred('izvestaj.php')">Pošalji</button>
+			<button type="button" style="margin-top: 10px" class="btn btn-default" onclick="uzim_vred('izvestaj.php',$(this).parent().attr('id'))">Pošalji</button>
 			
 			
 		</form>
