@@ -192,9 +192,6 @@ function uzim_vred(phpdoc,me){
 	var net = document.getElementById(parent_id).querySelectorAll("#"+parent_id+" [name]");
 	var len = document.getElementById(parent_id).length-1;
 		
-	var namex = "";
-	var valx = "";
-		
 	while(i<len) {
 			
 		name = net[i].getAttribute("name");
