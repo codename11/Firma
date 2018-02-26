@@ -1,5 +1,5 @@
 
-input[type="text"]:not(#username):not(#cont):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#tel):not(#jmbg), 
+input[type="text"]:not(#username):not(#cont):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#tel):not(#jmbg):not(#k_imex):not(#pwdx):not(#imex):not(#prezimex):not(#emailx):not(#telx):not(#jmbgx), 
 textarea, 
 textarea.form-control {
 	height: 50px;

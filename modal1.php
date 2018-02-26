@@ -12,40 +12,85 @@
         <div class="modal-body">
 
           <div class="container-fluid text-center" style="font-family:Palatino Linotype;">
-	<form method="POST" id="F1" class="vcenter" autocomplete="on">
+	<form id="F3">
 
+		
+		
 		<div class="row">
 
 			<div class="form-group col-sm-3">
-		
-				<label>Ime<span class="text-danger">*</span>:</label>
-				<input type="text" id="imex" class="form-control text-center" maxlength="30" name="imex" placeholder="Ime" value=''>
-			
+				<label for="k_ime">Korisničko ime:</label>
+				<input type="text" class="form-control" id="k_imex" maxlength="30" placeholder="Unesi korisničko ime:" name="k_ime" value="" required>
 			</div>
-	
+				
 			<div class="form-group col-sm-3">
-	
-				<label>Prezime<span class="text-danger">*</span>:</label>
-				<input type="text" id="prezimex" class="form-control text-center" maxlength="30" name="prezimex" placeholder="Prezime" value=''>
-		
-			</div>
-			<div class="form-group col-sm-3">
-		
-				<label>Broj telefona<span class="text-danger">*</span>:</label>
-				<input type="number" id="telx" class="form-control text-center" name="tel" min="0" oninput="javascript: if (this.value.length > this.maxLength) {alert('Ne može više od 10 cifara ...'); this.value = this.value.slice(0, this.maxLength);}"
-				maxlength = "10" name="telx" placeholder="Unesite broj telefona ..."  value=''>
-			
+				<label for="pwd">Šifra:</label>
+				<input type="password" class="form-control" id="pwdx" maxlength="30" placeholder="Unesi željenu šifru" name="pwd" value="" required>
 			</div>
 
-		<div class="form-group col-sm-3">
-		<label for="sel1">Kategorija:</label>
-			<select class="form-control" id="selx">
-				<option id="telx1" value="1">mobilni</option>
-				<option id="telx2" value="2">fiksni</option>
-			</select>
-		</div>	
+			<div class="form-group col-sm-3">
+				<label for="ime">Ime:</label>
+				<input type="text" class="form-control" id="imex" maxlength="30" placeholder="Unesi ime:" name="ime" value="" required>
+			</div>
+				
+			<div class="form-group col-sm-3">
+				<label for="prezime">Prezime:</label>
+				<input type="text" class="form-control" id="prezimex" maxlength="30" placeholder="Unesi prezime:" name="prezime" value="" required>
+			</div>
 		</div>
-		<button type="button" id="submit" style="margin-top: 10px" name="submit" class="btn btn-default" data-dismiss="modal" onclick='uzim_vredy("update_upit.php")'>Izmeni</button>	
+		<div class="row">	
+			<div class="form-group col-sm-3">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="emailx" maxlength="30" placeholder="Unesi email:" name="email" value="" required>
+			</div>
+
+			<div class="form-group col-sm-3">
+				<label for="tel">Telefon:</label>
+				<input type="number" class="form-control" id="telx" maxlength="10" placeholder="Unesi telefon:" name="tel" value="" required>
+			</div>
+			
+			<?php 
+
+					$pathTo_file = "/xampp/htdocs/www/knjigovodstvo/install/config.ini";
+					$myfile = fopen($pathTo_file, "r+") or die("Unable to open file!");
+					$tekst = fread($myfile,filesize($pathTo_file));
+					fclose($myfile);
+
+					$arr = explode(",",$tekst);
+
+					$servername = $arr[0];
+					$username = $arr[1];
+					$password = $arr[2];
+					$dbname = $arr[3];
+
+					$kon = new SimpleDB($servername, $username, $password, $dbname); 
+					$sql="SELECT id,kategorija FROM tel_kategorija"; 
+					$result = $kon->execute($sql);
+
+					
+					if ($result->num_rows > 0) {
+						// output data of each row
+						echo "<div class='form-group col-sm-3'><label for='sel4'>Kategorija</label><select id='selx' class='form-control' name='selx'>";
+						echo "<option value=''>"."</option>";
+						while($row = $result->fetch_assoc()) {
+						echo "<option value='".$row['id']."'>".$row['kategorija']."</option>";
+						}
+					} 
+					echo "</select></div>";
+	
+			?>
+			
+			
+			
+			<div class="form-group col-sm-3">
+				<label for="jmbg">JMBG:</label>
+				<input type="number" class="form-control" id="jmbgx" maxlength="14" placeholder="Unesi jmbg:" name="jmbg" value="" required>
+			</div>
+
+		</div>
+		
+		
+		<button type="button" id="submit" style="margin-top: 10px" name="submit" class="btn btn-default" data-dismiss="modal" onclick=''>Izmeni</button>	
 	</form>
 		
 </div>

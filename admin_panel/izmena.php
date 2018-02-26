@@ -5,7 +5,7 @@ require "adm.php";
 ?>
 
 
-	<div class="container" id="kont" class="kont">
+<div class="container" id="kont" class="kont">
 	<?php require "subnav.php"; ?>
 
 		<form id="F2" class="vcenter" autocomplete="on">
@@ -46,14 +46,14 @@ require "adm.php";
 			
 			<?php require "/xampp/htdocs/www/knjigovodstvo/install/kategorije_options.php"; ?>
 			
-			<div class="form-group col-sm-3">
+			<div class="form-group col-sm-2">
 				<label for="jmbg">JMBG:</label>
 				<input type="number" class="form-control" id="jmbg" maxlength="14" placeholder="Unesi jmbg:" name="jmbg" value="" required>
 			</div>
 					
-			<div class="form-group col-sm-3">
+			<div class="form-group col-sm-2">
 				<label>Sortiraj po:</label>
-				<select class="form-control" id="sort" name='sort'>
+				<select class="form-control" id="sort1" name='sort1'>
 					<option value=""></option>
 					<option value="1">ime rastuće</option>
 					<option value="2">ime opadajuće</option>
@@ -61,19 +61,37 @@ require "adm.php";
 					<option value="4">prezime opadajuće</option>
 					<option value="5">broj rastuće</option>
 					<option value="6">broj opadajuće</option>
+					<option value="7">JMBG rastuće</option>
+					<option value="8">JMBG opadajuće</option>
+					<option value="9">kategorija rastuće</option>
+					<option value="10">kategorija opadajuće</option>
+				</select>
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<label style="line-height: 93.5%;">Prikazati po stranici: </label>
+				<select class="form-control" id="sort2" name='sort2'>
+					<option value=""></option>
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="25">25</option>
+					<option value="50">50</option>
+					
 				</select>
 			</div>
 				
 			
 		</div>
-			<button type="button" style="margin-top: 10px" class="btn btn-default" onclick="uzim_vred('izvestaj.php',this)">Pošalji</button>
+			<button type="button" style="margin-top: 10px" class="btn btn-default" onclick="serialization('izvestaj.php',this)">Pošalji</button>
 			
 			
 		</form>
-		<div id="raport" style="margin-top: 1%;">
-			
+		<div class="row">
+			<div id="raport" class="col-xs-12" style="margin-top: 1%;">
+				
 			</div>
-			</div>
+		</div>
+</div>
 
 <?php 
 	include "../modal1.php";

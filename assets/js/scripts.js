@@ -181,7 +181,7 @@ jQuery(window).load(function() {
 	
 });
 
-function uzim_vred(phpdoc,me){
+function serialization(phpdoc,me){
 	
 	var parent_id = me.parentNode.id
 	var name = "";
@@ -231,3 +231,40 @@ function uzim_vred(phpdoc,me){
 	
 }
 
+function serializeTrow(me){
+	
+	var row = me.closest('tr').rowIndex;
+	var table_id = me.closest('table').id;
+	var cells = document.getElementById(table_id).rows[row].cells;
+	var len = cells.length;
+	
+	var i=0;
+	var arr = [];
+
+	while(i<(len-1)){
+		arr[i]=cells[i].innerHTML;
+		i++;
+	}
+	
+	arr.shift();
+
+	i=0;
+	var modal = document.querySelectorAll(".modal [name]");
+	var mod_len = modal.length;
+	
+	while(i<mod_len){
+
+		if(arr[i]=="fiksni"){
+			modal[i].value = 1;
+		}
+		else if(arr[i]=="mobilni"){
+			modal[i].value = 2;
+		}
+		else{
+			modal[i].value = arr[i];
+		}
+		
+		i++;
+	}
+
+}
