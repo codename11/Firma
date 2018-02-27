@@ -90,7 +90,7 @@
 		</div>
 		
 		
-		<button type="button" id="submit" style="margin-top: 10px" name="submit" class="btn btn-default" data-dismiss="modal" onclick=''>Izmeni</button>	
+		<button type="button" id="submit" style="margin-top: 10px" name="submit" class="btn btn-default" data-dismiss="modal" onclick="serialization('adminV2.php',this)">Izmeni</button>	
 	</form>
 		
 </div>
