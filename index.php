@@ -31,11 +31,7 @@ require "navbar.php";
             </div>
         </div>
 
-		<?php include "modal.php";
-		
-
-		
-		?>
+<?php include "modal.php"; ?>
 <?php 
 require "footer.php";	
 ?>

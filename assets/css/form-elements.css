@@ -36,7 +36,7 @@ input[name="optradio"],input[name="adminmodul"],input[name="ksluzba"],input[name
 	margin-bottom: 5%;
 }
 
-input[type="text"]:focus:not(#username):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#sel):not(#jmbg), 
+input[type="text"]:focus:not(#username):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#sel):not(#jmbg):not(#imex):not(#k_imex):not(#prezimex), 
 textarea:focus, 
 textarea.form-control:focus {
 	outline: 0;

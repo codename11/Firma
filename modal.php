@@ -10,7 +10,7 @@
           <h4 class="modal-title">Log In</h4>
         </div>
         <div class="modal-body">
-			<form id="login">
+			<form id="login" method="POST" action="modalLogIn.php">
 			
 				<div class="form-group">
 					<label for="username">Korisničko ime:</label>

@@ -1,10 +1,18 @@
-<?php require "../header.php"; ?>
+<?php 
+session_start();
+require "../header.php";
+
+if($_SESSION["confirm"]==true){
+	echo "Trenutno ulogovani korisnik: ".$_SESSION["username"];
+}
+else{
+	header('Location: /www/knjigovodstvo/index.php');
+}
+
+?>
 <div class="top-content">
 	<div class="container" id="cont">
-		<?php 
-			require "subnav.php";
-			
-		?>	
+		<?php require "subnav.php"; ?>	
   <form id="forma1">
 
 	<div class="form-group">

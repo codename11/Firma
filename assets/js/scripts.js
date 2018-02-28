@@ -46,24 +46,6 @@ jQuery(document).ready(function() {
 		
 	});
 	
-		
-	var url3 = "/www/knjigovodstvo/modalLogIn.php";
-	$("#login").submit(function(e) {
-		
-		$.ajax({
-		type : "POST",
-		url : url3,
-		data : $("#login").serialize(),
-		success: function(data){
-					alert("Success");
-					location.replace("/www/knjigovodstvo/admin_panel/admin.php");
-				}
-		});
-
-		
-	});
-	
-	
 	var url4 = "/www/knjigovodstvo/install/adminV1.php";
 	$("#forma1").submit(function() {
 		

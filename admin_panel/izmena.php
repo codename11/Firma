@@ -1,7 +1,14 @@
 <?php 
 session_start();
 require "../header.php";
-require "adm.php";
+
+if($_SESSION["confirm"]==true){
+	echo "Trenutno ulogovani korisnik: ".$_SESSION["username"];
+}
+else{
+	header('Location: /www/knjigovodstvo/index.php');
+}
+
 ?>
 
 

@@ -46,11 +46,10 @@ $dbname = $arr[3];
 
 $kon = new SimpleDB($servername, $username, $password, $dbname); 
 
-$sql1 = "SELECT k_ime, radnik.sifra, ime, prezime, email, broj, kategorija, JMBG,tel_kategorija.id AS katid
+$sql1 = "SELECT radnik.id, k_ime, radnik.sifra, korisnik.sifra, ime, prezime, email, broj, kategorija, JMBG,tel_kategorija.id AS katid
 FROM korisnik, radnik, tel_broj, tel_kategorija  
 WHERE radnik.id=korisnik.radnik_FK AND radnik.id=tel_broj.radnik_FK
 AND korisnicko_ime LIKE '$form_var[0]%' AND k_ime LIKE '$form_var[0]%' AND korisnicko_ime=k_ime 
-AND radnik.sifra=korisnik.sifra AND radnik.sifra LIKE '$form_var[1]%' AND radnik.sifra LIKE '$form_var[1]%' 
 AND ime LIKE '$form_var[2]%' AND prezime LIKE '$form_var[3]%' AND email LIKE '$form_var[4]%' 
 AND broj LIKE '$form_var[5]%' AND tel_kategorija.id LIKE '$form_var[6]%' AND tel_kategorija.id=tel_broj.kategorija_FK 
 AND tel_broj.kategorija_FK LIKE '$form_var[6]%' AND JMBG LIKE '$form_var[7]%' 
@@ -133,6 +132,7 @@ if($result->num_rows > 0){
 	echo $rejl2;
 	
 	while($row = $result->fetch_assoc()) {
+		$_SESSION["id"]=$row["id"];
 		$br1++;
 		
 ?>
