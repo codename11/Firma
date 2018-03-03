@@ -10,9 +10,7 @@ else{
 }
 
 ?>
-<script>
-var klik=0;
-</script>
+
 <div class="container" id="kont" class="kont">
 	<?php require "subnav.php"; ?>
 

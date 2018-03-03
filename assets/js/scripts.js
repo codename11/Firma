@@ -163,14 +163,14 @@ jQuery(window).load(function() {
 	
 });
 
-var str = "";
+
 function serialization(phpdoc,me){
 	
 	var FormId = me.form.id;
 	
 	var name = "";
 	var val = "";
-	str = phpdoc+"?,";
+	var str = phpdoc+"?,";
 	var i = 0;
 		
 	var net = document.getElementById(FormId).querySelectorAll("#"+FormId+" [name]");
@@ -200,6 +200,7 @@ function serialization(phpdoc,me){
 	}
 
 	str = encodeURI(str);
+	str1 = str;
 	
 	var xhttp = new XMLHttpRequest();
 		
@@ -210,7 +211,7 @@ function serialization(phpdoc,me){
 		}
 		 
 	};
-
+	
 	xhttp.open("GET", str, false);		
 	xhttp.send();
 	
@@ -254,7 +255,7 @@ function serializeTrow(me){
 
 }
 
-
+var klik=0;
 function pag_arrow_lim(me){
 
 	var stx = "";
@@ -282,7 +283,7 @@ function pag_arrow_lim(me){
 
 	};
 
-	stx = str+"&offset="+klik;
+	stx = str1+"&offset="+klik;
 	xhttp.open("GET", stx, true);
 
 	xhttp.send();
