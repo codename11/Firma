@@ -198,10 +198,7 @@ function serialization(phpdoc,me){
 		str += elems[i];
 		i++
 	}
-	
-	/*var offset = 0;
-	var limit = 0;
-	str = str+"&"+offset+"&"+limit;*/
+
 	str = encodeURI(str);
 	
 	var xhttp = new XMLHttpRequest();
@@ -257,44 +254,16 @@ function serializeTrow(me){
 
 }
 
-var klik=0;
+
 function pag_arrow_lim(me){
-	//var x = document.getElementById("jork").childElementCount;
-	
+
 	var stx = "";
-	//var FormId = me.form.id;
-	input_id=me.id
-	if(input_id=="left"){
-
-		klik--;
-
-
-		/*if(klik<0){
-			klik=(x-1);
-		}
-		offset=limit*klik;*/
-
-	}
-	
-	if(input_id=="right"){
-	
-		klik++;
-
-		/*if(klik>(x-1)){
-			klik=0;
-		}
-		
-		offset=limit*klik;*/
-		
-	}
-	
-	
+	input_id=me.id;
 	
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     
 		if (this.readyState == 4 && this.status == 200) {
-			
 			
 			document.getElementById("raport").innerHTML =this.responseText;
 			
@@ -312,7 +281,7 @@ function pag_arrow_lim(me){
 		}
 
 	};
-	
+
 	stx = str+"&offset="+klik;
 	xhttp.open("GET", stx, true);
 

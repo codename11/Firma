@@ -100,22 +100,26 @@ switch ($form_var[8]) {
         $sql1.=$sql2;
 }
 
+$konx = new SimpleDB($servername, $username, $password, $dbname);
+$row_cnt="SELECT COUNT(id) FROM tel_broj GROUP BY id";
+$row_count = $konx->execute($row_cnt)->num_rows;
 
-if(strlen($form_var[9])==0){
-	$form_var[9]="1";
+if(strlen($form_var[9])==0){//limit;
+	$form_var[9]="2";
 }
 
-if(!(isset($form_var[10])) && empty($form_var[10])){
+if(!(isset($form_var[10])) && empty($form_var[10])){//offset/klik
 	
-	$form_var[10]=0;
+	$form_var[10]=0;//Ako je offset veci ili manji od broja redova ili stranica, resetovati offset
 	echo $form_var[9]."*".$form_var[10]." = ".($form_var[9]*$form_var[10]);
 }
 else{
 	
 	echo $form_var[9]."*".$form_var[10]." = ".($form_var[9]*$form_var[10]);
 }
+$offsetx = ($form_var[9]*$form_var[10]);
 
-$sql1=$sql1." LIMIT ".$form_var[9]." OFFSET ".($form_var[9]*$form_var[10]);
+$sql1=$sql1." LIMIT ".$form_var[9]." OFFSET ".$offsetx;
 
 $result = $kon->execute($sql1);
 
@@ -162,9 +166,9 @@ else{
 
 ?>
 
-<a id='left' class='btn btn-info btn-md' style='margin-right: 3px;' onclick="pag_arrow_lim(this)">
+<a id='left' class='btn btn-info btn-md' style='margin-right: 3px;' onclick="klik--;if(klik<0){klik=1;}; if((klik*(<?php echo $form_var[9]; ?>))>=<?php echo $row_count; ?>){klik=0;}; pag_arrow_lim(this);">
 	<span class='glyphicon glyphicon-arrow-left' style='height: 16px'></span>
 </a>
-<a id='right' class='btn btn-info btn-md' style='margin-left: 3px;' onclick="pag_arrow_lim(this)">
+<a id='right' class='btn btn-info btn-md' style='margin-left: 3px;' onclick="klik++; if((klik*(<?php echo $form_var[9]; ?>))>=<?php echo $row_count; ?>){klik=0;}; pag_arrow_lim(this);">
 	<span class='glyphicon glyphicon-arrow-right' style='height: 16px'></span>
 </a>
