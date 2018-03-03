@@ -662,3 +662,11 @@ html, body, #top-content1{
 .tabovi{
 	margin-bottom: 1%; border-bottom: 3px solid white;
 }
+
+.klasicax{
+	border: 3px solid #99ccff;
+}
+
+.klasicay{
+	border: 0px solid #99ccff;
+}

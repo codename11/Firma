@@ -15,7 +15,7 @@ else{
 <div class="container" id="kont" class="kont">
 	<?php require "subnav.php"; ?>
 
-		<form id="F2" class="vcenter" autocomplete="on">
+		<form id="F2" class="vcenter" autocomplete="on" onchange="klik=0">
 
 			<div class="row">
 
@@ -77,8 +77,9 @@ else{
 			
 			<div class="form-group col-sm-2">
 				<label style="line-height: 93.5%;">Prikazati po stranici: </label>
-				<select class="form-control" id="sort2" name='sort2'>
+				<select class="form-control" id="sort2" name='sort2' onchange="serialization('izvestaj.php',this)">
 					<option value=""></option>
+					<option value="1">1</option>
 					<option value="5">5</option>
 					<option value="10">10</option>
 					<option value="25">25</option>
@@ -95,6 +96,11 @@ else{
 		</form>
 		<div class="row">
 			<div id="raport" class="col-xs-12" style="margin-top: 1%;">
+				
+			</div>
+		</div>
+		<div class="row">
+			<div id="dmx" class="col-xs-12" style="margin-top: 1%;">
 				
 			</div>
 		</div>

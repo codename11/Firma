@@ -13,8 +13,6 @@ if(isset($_GET)){
 		$form_var[] = $obj1 -> test_input($obj1 -> getData());
 	
 	}
-	//print_r($form_var);
-	//echo $form_var[1];	
 }
 
 /*Sadrzaj:
@@ -28,7 +26,7 @@ $form_var[6]== Kategorija;
 $form_var[7]== JMBG;
 $form_var[8]== Sortiraj po;
 $form_var[9]== Prikazati po stranici;
-
+$form_var[10]== offset;
 */
 $len = count($form_var);
 
@@ -103,8 +101,22 @@ switch ($form_var[8]) {
 }
 
 
+if(strlen($form_var[9])==0){
+	$form_var[9]="1";
+}
 
-//$sql1=$sql1." LIMIT ".$form_var[9];
+if(!(isset($form_var[10])) && empty($form_var[10])){
+	
+	$form_var[10]=0;
+	echo $form_var[9]."*".$form_var[10]." = ".($form_var[9]*$form_var[10]);
+}
+else{
+	
+	echo $form_var[9]."*".$form_var[10]." = ".($form_var[9]*$form_var[10]);
+}
+
+$sql1=$sql1." LIMIT ".$form_var[9]." OFFSET ".($form_var[9]*$form_var[10]);
+
 $result = $kon->execute($sql1);
 
 $rejl1 = "<div class='podaci table-responsive'>
@@ -149,3 +161,10 @@ else{
 }
 
 ?>
+
+<a id='left' class='btn btn-info btn-md' style='margin-right: 3px;' onclick="pag_arrow_lim(this)">
+	<span class='glyphicon glyphicon-arrow-left' style='height: 16px'></span>
+</a>
+<a id='right' class='btn btn-info btn-md' style='margin-left: 3px;' onclick="pag_arrow_lim(this)">
+	<span class='glyphicon glyphicon-arrow-right' style='height: 16px'></span>
+</a>

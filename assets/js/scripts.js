@@ -163,16 +163,18 @@ jQuery(window).load(function() {
 	
 });
 
+var str = "";
 function serialization(phpdoc,me){
 	
-	var parent_id = me.parentNode.id
+	var FormId = me.form.id;
+	
 	var name = "";
 	var val = "";
-	var str = phpdoc+"?,";
+	str = phpdoc+"?,";
 	var i = 0;
 		
-	var net = document.getElementById(parent_id).querySelectorAll("#"+parent_id+" [name]");
-	var len = document.getElementById(parent_id).length-1;
+	var net = document.getElementById(FormId).querySelectorAll("#"+FormId+" [name]");
+	var len = document.getElementById(FormId).length-1;
 		
 	while(i<len) {
 			
@@ -196,6 +198,10 @@ function serialization(phpdoc,me){
 		str += elems[i];
 		i++
 	}
+	
+	/*var offset = 0;
+	var limit = 0;
+	str = str+"&"+offset+"&"+limit;*/
 	str = encodeURI(str);
 	
 	var xhttp = new XMLHttpRequest();
@@ -249,4 +255,67 @@ function serializeTrow(me){
 		i++;
 	}
 
+}
+
+var klik=0;
+function pag_arrow_lim(me){
+	//var x = document.getElementById("jork").childElementCount;
+	
+	var stx = "";
+	//var FormId = me.form.id;
+	input_id=me.id
+	if(input_id=="left"){
+
+		klik--;
+
+
+		/*if(klik<0){
+			klik=(x-1);
+		}
+		offset=limit*klik;*/
+
+	}
+	
+	if(input_id=="right"){
+	
+		klik++;
+
+		/*if(klik>(x-1)){
+			klik=0;
+		}
+		
+		offset=limit*klik;*/
+		
+	}
+	
+	
+	
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    
+		if (this.readyState == 4 && this.status == 200) {
+			
+			
+			document.getElementById("raport").innerHTML =this.responseText;
+			
+			/*var elems = document.querySelectorAll(".klasicax");
+			[].forEach.call(elems, function(el) {
+				el.classList.add("klasicay");
+				el.classList.add("btn");
+				el.classList.add("btn-info");
+				el.classList.add("btn-sm");
+				el.classList.add("podaci");
+			});
+	
+			document.getElementById("trash"+(klik+1)).className = "klasicax btn btn-info btn-sm podaci";*/
+      
+		}
+
+	};
+	
+	stx = str+"&offset="+klik;
+	xhttp.open("GET", stx, true);
+
+	xhttp.send();
+	
 }
