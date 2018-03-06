@@ -260,7 +260,20 @@ function pag_arrow_lim(me){
 
 	var stx = "";
 	input_id=me.id;
+
+	if(input_id=="prev"){
+		klik--;
+		
+		if(klik<0){
+			klik=1;
+		}
+		
+	}
 	
+	if(input_id=="next"){
+		klik++;
+	}
+
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     
@@ -283,9 +296,12 @@ function pag_arrow_lim(me){
 
 	};
 
-	stx = str1+"&offset="+klik;
-	xhttp.open("GET", stx, true);
+	stx = str1+"&klik="+klik;
 
-	xhttp.send();
+	xhttp.open("GET", stx, true);
 	
+	xhttp.send();
+
+	
+
 }

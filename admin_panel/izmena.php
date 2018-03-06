@@ -77,7 +77,6 @@ else{
 			<div class="form-group col-sm-2">
 				<label style="line-height: 93.5%;">Prikazati po stranici: </label>
 				<select class="form-control" id="sort2" name='sort2' onchange="serialization('izvestaj.php',this)">
-					<option value=""></option>
 					<option value="2">2</option>
 					<option value="5">5</option>
 					<option value="10">10</option>
@@ -104,7 +103,8 @@ else{
 			</div>
 		</div>
 </div>
-
+<script>
+</script>
 <?php 
 	include "../modal1.php";
 
