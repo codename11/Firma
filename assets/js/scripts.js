@@ -170,7 +170,7 @@ function serialization(phpdoc,me){
 	
 	var name = "";
 	var val = "";
-	var str = phpdoc+"?,";
+	var str = phpdoc+"?";
 	var i = 0;
 		
 	var net = document.getElementById(FormId).querySelectorAll("#"+FormId+" [name]");
@@ -185,18 +185,9 @@ function serialization(phpdoc,me){
 		str += name+"="+val;
 			
 		if(i<len){
-			str += "&,"
+			str += "&"
 		}
 			
-	}
-		
-	i = 0;
-	var elems = str.split(",");
-
-	str = "";
-	while(i<=len){
-		str += elems[i];
-		i++
 	}
 
 	str = encodeURI(str);
@@ -261,19 +252,6 @@ function pag_arrow_lim(me){
 	var stx = "";
 	input_id=me.id;
 
-	if(input_id=="prev"){
-		klik--;
-		
-		if(klik<0){
-			klik=1;
-		}
-		
-	}
-	
-	if(input_id=="next"){
-		klik++;
-	}
-
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     
@@ -296,7 +274,7 @@ function pag_arrow_lim(me){
 
 	};
 
-	stx = str1+"&klik="+klik;
+	stx = str1+"&klik="+input_id;
 
 	xhttp.open("GET", stx, true);
 	

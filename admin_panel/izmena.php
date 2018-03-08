@@ -20,46 +20,46 @@ else{
 
 				<div class="form-group col-sm-2">
 					<label for="k_ime" style="line-height: 93.5%;">Korisničko ime:</label>
-					<input type="text" class="form-control" id="k_ime" maxlength="30" placeholder="Unesi korisničko ime:" name="k_ime" value="" onkeyup="serialization('izvestaj.php',this)" required>
+					<input type="text" class="form-control" id="k_ime" maxlength="30" placeholder="Unesi korisničko ime:" name="k_ime" value="" required>
 				</div>
 				
 				<div class="form-group col-sm-2">
 					<label for="pwd">Šifra:</label>
-					<input type="password" class="form-control" id="pwd" maxlength="30" placeholder="Unesi željenu šifru" name="pwd" value="" onkeyup="serialization('izvestaj.php',this)" required>
+					<input type="password" class="form-control" id="pwd" maxlength="30" placeholder="Unesi željenu šifru" name="pwd" value="" required>
 				</div>
 
 				<div class="form-group col-sm-3">
 					<label for="ime">Ime:</label>
-					<input type="text" class="form-control" id="ime" maxlength="30" placeholder="Unesi ime:" name="ime" value="" onkeyup="serialization('izvestaj.php',this)" required>
+					<input type="text" class="form-control" id="ime" maxlength="30" placeholder="Unesi ime:" name="ime" value="" required>
 				</div>
 				
 				<div class="form-group col-sm-3">
 					<label for="prezime">Prezime:</label>
-					<input type="text" class="form-control" id="prezime" maxlength="30" placeholder="Unesi prezime:" name="prezime" onkeyup="serialization('izvestaj.php',this)" value="" required>
+					<input type="text" class="form-control" id="prezime" maxlength="30" placeholder="Unesi prezime:" name="prezime" value="" required>
 				</div>
 				
 				<div class="form-group col-sm-2">
 					<label for="email">Email:</label>
-					<input type="email" class="form-control" id="email" maxlength="30" placeholder="Unesi email:" name="email" value="" onkeyup="serialization('izvestaj.php',this)" required>
+					<input type="email" class="form-control" id="email" maxlength="30" placeholder="Unesi email:" name="email" value="" required>
 				</div>
 			</div>
 			
 		<div class="row">
 			<div class="form-group col-sm-3">
 				<label for="tel">Telefon:</label>
-				<input type="number" class="form-control" id="tel" maxlength="10" placeholder="Unesi telefon:" name="tel" value="" onkeyup="serialization('izvestaj.php',this)" required>
+				<input type="number" class="form-control" id="tel" maxlength="10" placeholder="Unesi telefon:" name="tel" value="" required>
 			</div>
 			
 			<?php require "/xampp/htdocs/www/knjigovodstvo/install/kategorije_options.php"; ?>
 			
 			<div class="form-group col-sm-2">
 				<label for="jmbg">JMBG:</label>
-				<input type="number" class="form-control" id="jmbg" maxlength="14" placeholder="Unesi jmbg:" name="jmbg" value="" onkeyup="serialization('izvestaj.php',this)" required>
+				<input type="number" class="form-control" id="jmbg" maxlength="14" placeholder="Unesi jmbg:" name="jmbg" value="" required>
 			</div>
 					
 			<div class="form-group col-sm-2">
 				<label>Sortiraj po:</label>
-				<select class="form-control" id="sort1" name='sort1' onchange="serialization('izvestaj.php',this)">
+				<select class="form-control" id="sort1" name='sort1'>
 					<option value=""></option>
 					<option value="1">ime rastuće</option>
 					<option value="2">ime opadajuće</option>
@@ -76,7 +76,7 @@ else{
 			
 			<div class="form-group col-sm-2">
 				<label style="line-height: 93.5%;">Prikazati po stranici: </label>
-				<select class="form-control" id="sort2" name='sort2' onchange="serialization('izvestaj.php',this)">
+				<select class="form-control" id="sort2" name='sort2'>
 					<option value="2">2</option>
 					<option value="5">5</option>
 					<option value="10">10</option>

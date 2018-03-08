@@ -25,7 +25,7 @@ $form_var[5]== Telefon;
 $form_var[6]== Kategorija;
 $form_var[7]== JMBG;
 $form_var[8]== Sortiraj po;
-$form_var[9]== Prikazati po stranici;
+$form_var[9]== Prikazati po stranici/limit;
 $form_var[10]== offset;
 */
 $len = count($form_var);
@@ -98,42 +98,65 @@ switch ($form_var[8]) {
         break;
     default:
         $sql1.=$sql2;
+		$alt_sql = $sql1;
 }
-$alt_sql = $sql1;
-if(!(isset($form_var[10])) && empty($form_var[10])){//offset/klik
+
+
+if(!(isset($form_var[9])) && empty($form_var[9])){//offset, klik
 	
-	$form_var[10]=0;//Ako je offset veci ili manji od broja redova ili stranica, resetovati offset
+	$form_var[9]=0;
 }
 
-$konx = new SimpleDB($servername, $username, $password, $dbname);
-$row_cnt="SELECT COUNT(id) FROM tel_broj GROUP BY id";
-$row_count = $konx->execute($row_cnt)->num_rows;
 
-$limit = $form_var[9];//
-$offset = ($form_var[9]*$form_var[10]);//Calculate offset
-echo "Offset: ".$offset." Limit: ".$limit."</br>";
-
-$sql1=$sql1." LIMIT ".$limit." OFFSET ".$offset;
-
-$current_page = $form_var[10]+1;			//Number of current page
-$total_pages=$kon->execute($sql1)->num_rows;//Total pages
-
-
-
-if($total_pages==$row_count){
-
-	$total_pages=($total_pages/$row_count);
+if(!(isset($form_var[10])) && empty($form_var[10])){//offset, klik
 	
-	echo "Blah1!</br>";
-	if($limit==$offset){
-		echo "Blah2!";
-		$total_pages=$current_page;
-	}
-
+	$form_var[10]="";
+	$offset = 0;
 }
 
+$konx = new SimpleDB($servername, $username, $password, $dbname);//Make connection
+$row_cnt="SELECT COUNT(id) FROM tel_broj GROUP BY id";//Query to find out number of total
+$row_count = $konx->execute($row_cnt)->num_rows;//Number of ALL rows.
+$numOfRows = $konx->execute($sql1)->num_rows;//Number of records per page
+echo "yyyy: ".$row_count."</br>";
+if(isset($form_var[10]) && $form_var[10]== "prev"){
+	
+	$_SESSION["increment"]--;//If button with id="prev" is pressed, decrease counter.
+	
+}
+
+if(isset($form_var[10]) && $form_var[10]== "next"){
+	
+	$_SESSION["increment"]++;//If button with id="next" is pressed, increase counter.
+	
+}
+
+$limit = $form_var[9];//Calculate limit.
+$offset = ($form_var[9]*$_SESSION["increment"]);//Calculate offset.
+$current_page = $_SESSION["increment"]+1;//Number of current page.
+$total_pages = ceil($row_count/$limit); //Calculate pages total.
+
+if($limit>$row_count){
+
+	$offset = 0;
+}
+/*
+Treba razlicit broj klikova za razlicit offset. Ovo vazi i za filtriranje.
+
+Te treba regulisati:
+1. 	session-increment da ne ide izvan opsega.
+2. 	offset da ne ide van opsega.
+3.	Limit i offset treba "ignorisati" ukoliko je stavljeno nešto za filtriranje. 
+4. 	Ponovo pokrenuti sada izmenjeni upit.
+5. 	Takodje staviti ovo u izmenu <option value=""></option> i regulisati da ovo bude po difoltu.
+*/
+$sql1 = $sql1." LIMIT ".$limit." OFFSET ".$offset;
 $result = $kon->execute($sql1);
 
+//echo "alt_sql: ".$alt_sql."</br>";
+//echo "sql1: ".$sql1."</br>";
+echo "Session: ".$_SESSION["increment"]."</br>";
+echo "Limit: ".$limit." Offset: ".$offset."</br>";
 echo "Strana ".$current_page." od ".$total_pages."</br>";
 
 $rejl1 = "<div class='podaci table-responsive'>
@@ -171,32 +194,7 @@ if($result->num_rows > 0){
 <?php
 	}
 	echo "</tbody></table></div>";
-	
-	if($current_page==$total_pages){
-		
-		echo "<a id='prev' class='btn btn-info btn-md' style='margin-right: 3px;' onclick='pag_arrow_lim(this);'>
-			<span class='glyphicon glyphicon-arrow-left' style='height: 16px'></span>
-		  </a>
-		  
-		  <a id='next' class='btn btn-info btn-md' style='margin-left: 3px;' onclick='klik=(-1);pag_arrow_lim(this);'>
-			<span class='glyphicon glyphicon-arrow-right' style='height: 16px'></span>
-		  </a>";
-	}
-	else{
-		
-		echo "<a id='prev' class='btn btn-info btn-md' style='margin-right: 3px;' onclick='pag_arrow_lim(this);'>
-			<span class='glyphicon glyphicon-arrow-left' style='height: 16px'></span>
-		  </a>
-		  
-		  <a id='next' class='btn btn-info btn-md' style='margin-left: 3px;' onclick='pag_arrow_lim(this);'>
-			<span class='glyphicon glyphicon-arrow-right' style='height: 16px'></span>
-		  </a>";
-	}
-	
-	
-	
-	
-	
+
 }
 else{
 	echo "<p class='podaci'>Nema takvog korisnika u bazi!</p>";
@@ -204,4 +202,10 @@ else{
 
 ?>
 
-
+<a id='prev' class='btn btn-info btn-md' style='margin-right: 3px;' onclick='pag_arrow_lim(this);'>
+	<span class='glyphicon glyphicon-arrow-left' style='height: 16px'></span>
+</a>
+			  
+<a id='next' class='btn btn-info btn-md' style='margin-left: 3px;' onclick='pag_arrow_lim(this);'>
+	<span class='glyphicon glyphicon-arrow-right' style='height: 16px'></span>
+</a>
