@@ -102,12 +102,6 @@ switch ($form_var[8]) {
 }
 
 
-if(!(isset($form_var[9])) && empty($form_var[9])){//offset, klik
-	
-	$form_var[9]=0;
-}
-
-
 if(!(isset($form_var[10])) && empty($form_var[10])){//offset, klik
 	
 	$form_var[10]="";
@@ -118,7 +112,7 @@ $konx = new SimpleDB($servername, $username, $password, $dbname);//Make connecti
 $row_cnt="SELECT COUNT(id) FROM tel_broj GROUP BY id";//Query to find out number of total
 $row_count = $konx->execute($row_cnt)->num_rows;//Number of ALL rows.
 $numOfRows = $konx->execute($sql1)->num_rows;//Number of records per page
-echo "yyyy: ".$row_count."</br>";
+
 if(isset($form_var[10]) && $form_var[10]== "prev"){
 	
 	$_SESSION["increment"]--;//If button with id="prev" is pressed, decrease counter.
@@ -134,29 +128,73 @@ if(isset($form_var[10]) && $form_var[10]== "next"){
 $limit = $form_var[9];//Calculate limit.
 $offset = ($form_var[9]*$_SESSION["increment"]);//Calculate offset.
 $current_page = $_SESSION["increment"]+1;//Number of current page.
-$total_pages = ceil($row_count/$limit); //Calculate pages total.
 
-if($limit>$row_count){
-
-	$offset = 0;
+if($limit == 0){//If limit ..er $form_var[9] is not set
+		
+		$_SESSION["increment"]=0;
+		$limit = 0;
+		$total_pages = 1;
+		$current_page = 1;
 }
-/*
-Treba razlicit broj klikova za razlicit offset. Ovo vazi i za filtriranje.
+else{
+	
+	$total_pages = ceil($row_count/$limit); //Calculate pages total.
+}
 
-Te treba regulisati:
-1. 	session-increment da ne ide izvan opsega.
-2. 	offset da ne ide van opsega.
-3.	Limit i offset treba "ignorisati" ukoliko je stavljeno nešto za filtriranje. 
-4. 	Ponovo pokrenuti sada izmenjeni upit.
-5. 	Takodje staviti ovo u izmenu <option value=""></option> i regulisati da ovo bude po difoltu.
-*/
+if($offset<0){
+	
+	$_SESSION["increment"]=3;
+	$offset = 6;
+	$current_page = $total_pages;
+}
+
+if($offset>=$row_count){
+	
+	$_SESSION["increment"]=0;
+	$offset = 0;
+	$current_page = 1;
+}
+
+if($offset>=$numOfRows){
+	
+	$_SESSION["increment"]=0;
+	$offset = 0;
+	$current_page = 1;
+	$total_pages = $numOfRows;
+}
+
+if($form_var[9]>$row_count){
+	$_SESSION["increment"]=0;
+	$offset = 0;
+	$current_page = 1;
+	$total_pages = 1;
+}
+
+if($form_var[9]>$numOfRows){
+	$current_page = 1;
+	$total_pages = 1;
+}
+
 $sql1 = $sql1." LIMIT ".$limit." OFFSET ".$offset;
+
+if($form_var[9]==="" && isset($form_var[9]) && empty($form_var[9])){
+
+	$sql1 = $alt_sql;
+}
+
 $result = $kon->execute($sql1);
 
-//echo "alt_sql: ".$alt_sql."</br>";
-//echo "sql1: ".$sql1."</br>";
+if(($result->num_rows)<=0){
+	$current_page = 0;
+	$total_pages = 0;
+}
+
+/*echo "alt_sql: ".$alt_sql."</br>";
+echo "sql1: ".$sql1."</br>";
+echo "numOfRows: ".$numOfRows."<br>";
+echo "row_count: ".$row_count."</br>";
 echo "Session: ".$_SESSION["increment"]."</br>";
-echo "Limit: ".$limit." Offset: ".$offset."</br>";
+echo "Limit: ".$limit." Offset: ".$offset."</br>";*/
 echo "Strana ".$current_page." od ".$total_pages."</br>";
 
 $rejl1 = "<div class='podaci table-responsive'>
@@ -184,12 +222,12 @@ if($result->num_rows > 0){
 	echo $rejl2;
 	
 	while($row = $result->fetch_assoc()) {
-		$_SESSION["id"]=$row["id"];
+		
 		$br1++;
 		
 ?>
 		<tr>
-			<td><?php echo $br1; ?></td><td><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
+			<td><?php echo $br1; $_SESSION["id"]=$row["id"]; ?></td><td><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
 		</tr>
 <?php
 	}

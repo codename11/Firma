@@ -280,6 +280,4 @@ function pag_arrow_lim(me){
 	
 	xhttp.send();
 
-	
-
 }
