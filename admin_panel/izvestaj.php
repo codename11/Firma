@@ -102,7 +102,7 @@ switch ($form_var[8]) {
 }
 
 
-if(!(isset($form_var[10])) && empty($form_var[10])){//offset, klik
+if(!(isset($form_var[10])) && empty($form_var[10])){//offset, klik, page number.
 	
 	$form_var[10]="";
 	$offset = 0;
@@ -113,17 +113,35 @@ $row_cnt="SELECT COUNT(id) FROM tel_broj GROUP BY id";//Query to find out number
 $row_count = $konx->execute($row_cnt)->num_rows;//Number of ALL rows.
 $numOfRows = $konx->execute($sql1)->num_rows;//Number of records per page
 
-if(isset($form_var[10]) && $form_var[10]== "prev"){
+if(isset($form_var[10])){/*Determine if eleventh array member is set. And if, what kind value contains.
+	If it's no numeric value, then we increment for +1 whenever this script is called. 
+	If it's numeric, then we initialize variable session-increment with said value.
+	Value by which we initialize or increment is contained as id 
+	of an element who envokes it by asinchronuos call(AJAX)*/
+	if($form_var[10]== "prev"){
 	
-	$_SESSION["increment"]--;//If button with id="prev" is pressed, decrease counter.
+		$_SESSION["increment"]--;//If button with id="prev" is pressed, decrease counter.
+	
+	}
+
+	if($form_var[10]== "next"){
+		
+		$_SESSION["increment"]++;//If button with id="next" is pressed, increase counter.
+		
+	}
+	
+	if(isset($form_var[10][3])){//If numbered buttons are pressed.
+		
+		if(is_numeric($form_var[10][3])===true){//Setting increment, thus now we are able to calculate offset from page number.
+
+			$_SESSION["increment"] = $form_var[10][3];
+		}
+		
+	}
 	
 }
 
-if(isset($form_var[10]) && $form_var[10]== "next"){
-	
-	$_SESSION["increment"]++;//If button with id="next" is pressed, increase counter.
-	
-}
+
 
 $limit = $form_var[9];//Calculate limit.
 $offset = ($form_var[9]*$_SESSION["increment"]);//Calculate offset.
@@ -201,8 +219,7 @@ $rejl1 = "<div class='podaci table-responsive'>
 	<table id='tabela' class='table table-hover table-bordered table-sm'>
 		<thead>
 			<tr>
-				<th class='text-center'>Redni broj</th>
-				<th class='text-center'>Korisničko ime</th>
+				<th class='text-center' colspan='2'>Korisničko ime</th>
 				<th class='text-center'>Šifra</th>
 				<th class='text-center'>Ime</th>
 				<th class='text-center'>Prezime</th>
@@ -227,7 +244,7 @@ if($result->num_rows > 0){
 		
 ?>
 		<tr>
-			<td><?php echo $br1; $_SESSION["id"]=$row["id"]; ?></td><td><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
+			<td style="border-right: none; border-top: none;"><input type="checkbox"><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
 		</tr>
 <?php
 	}
@@ -240,10 +257,38 @@ else{
 
 ?>
 
-<a id='prev' class='btn btn-info btn-md' style='margin-right: 3px;' onclick='pag_arrow_lim(this);'>
-	<span class='glyphicon glyphicon-arrow-left' style='height: 16px'></span>
-</a>
-			  
-<a id='next' class='btn btn-info btn-md' style='margin-left: 3px;' onclick='pag_arrow_lim(this);'>
-	<span class='glyphicon glyphicon-arrow-right' style='height: 16px'></span>
-</a>
+
+<ul class="pagination">
+	<li class="page-item"><a class="page-link" id="prev" href="#" onclick='pagination(this);'>Prev</a></li>
+  
+  <?php
+	
+	$i=0;
+	
+	while($i<$total_pages){
+		
+		if(($i+1)==$current_page){
+		
+		?>
+  
+	<li class="page-item active"><a id="num<?php echo $i; ?>" class="page-link" href="#"  onclick='pagination(this);'><?php echo ($i+1); ?></a></li>
+  
+  <?php	
+		}
+		else{
+			?>
+			
+			<li class="page-item"><a id="num<?php echo $i; ?>" class="page-link" href="#"  onclick='pagination(this);'><?php echo ($i+1); ?></a></li>
+		
+		<?php
+		}
+		$i++;
+	}
+
+?>	
+  
+	<li class="page-item"><a class="page-link" id="next" href="#" onclick='pagination(this);'>Next</a></li>
+</ul>
+
+
+

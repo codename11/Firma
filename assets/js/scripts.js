@@ -247,7 +247,7 @@ function serializeTrow(me){
 }
 
 var klik=0;
-function pag_arrow_lim(me){
+function pagination(me){
 
 	var stx = "";
 	input_id=me.id;
