@@ -258,17 +258,6 @@ function pagination(me){
 		if (this.readyState == 4 && this.status == 200) {
 			
 			document.getElementById("raport").innerHTML =this.responseText;
-			
-			/*var elems = document.querySelectorAll(".klasicax");
-			[].forEach.call(elems, function(el) {
-				el.classList.add("klasicay");
-				el.classList.add("btn");
-				el.classList.add("btn-info");
-				el.classList.add("btn-sm");
-				el.classList.add("podaci");
-			});
-	
-			document.getElementById("trash"+(klik+1)).className = "klasicax btn btn-info btn-sm podaci";*/
       
 		}
 

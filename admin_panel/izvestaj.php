@@ -161,8 +161,8 @@ else{
 
 if($offset<0){
 	
-	$_SESSION["increment"]=3;
-	$offset = 6;
+	$_SESSION["increment"]=(($row_count-1)/$form_var[9]);
+	$offset = ($row_count-1);
 	$current_page = $total_pages;
 }
 
@@ -212,7 +212,8 @@ echo "sql1: ".$sql1."</br>";
 echo "numOfRows: ".$numOfRows."<br>";
 echo "row_count: ".$row_count."</br>";
 echo "Session: ".$_SESSION["increment"]."</br>";
-echo "Limit: ".$limit." Offset: ".$offset."</br>";*/
+echo "Limit: ".$limit." Offset: ".$offset."</br>";
+echo "</br>".$form_var[9]."*".$_SESSION["increment"]." = ".$form_var[9]*$_SESSION["increment"]."<br>";*/
 echo "Strana ".$current_page." od ".$total_pages."</br>";
 
 $rejl1 = "<div class='podaci table-responsive'>
