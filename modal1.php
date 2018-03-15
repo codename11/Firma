@@ -89,6 +89,27 @@
 
 		</div>
 		
+		<div class="row">
+		
+			<div class="dropdown col-sm-3">
+				<button type="button" id="btn2" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<span>Moduli</span>
+					<span class="caret" id="caret1"></span>
+				</button>
+				<ul id="comp" class="dropdown-menu">
+				  <li><a class="dropdown-item"><input type="checkbox" name="adminmodul" value="x"> Admin modul</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="ksluzba" value="x"> Kadrovska služba</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="esalter" value="x"> E-šalter</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="evidencijaio" value="x"> Evidencija ulaza/izlaza</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="mposlovanje" value="x"> Materijalno poslovanje</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="emagacin" value="x"> E-magacin</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="blagajna" value="x"> Blagajna</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="mehanizacija" value="x"> Mehanizacija</a></li>
+				  <li><a class="dropdown-item"><input type="checkbox" name="ekancelarija" value="x"> E-kancelarija</a></li>
+				</ul>
+			</div>
+		
+		</div>
 		
 		<button type="button" id="submit" style="margin-top: 10px" name="submit" class="btn btn-default" data-dismiss="modal" onclick="serialization('adminV2.php',this)">Izmeni</button>	
 	</form>

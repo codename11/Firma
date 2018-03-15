@@ -161,7 +161,7 @@ else{
 
 if($offset<0){
 	
-	$_SESSION["increment"]=(($row_count-1)/$form_var[9]);
+	$_SESSION["increment"] = floor($row_count/$form_var[9]);
 	$offset = ($row_count-1);
 	$current_page = $total_pages;
 }
