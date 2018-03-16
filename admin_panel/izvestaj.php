@@ -171,6 +171,7 @@ if($offset>=$row_count){
 	$_SESSION["increment"]=0;
 	$offset = 0;
 	$current_page = 1;
+	
 }
 
 if($offset>=$numOfRows){
@@ -179,6 +180,7 @@ if($offset>=$numOfRows){
 	$offset = 0;
 	$current_page = 1;
 	$total_pages = $numOfRows;
+	
 }
 
 if($form_var[9]>$row_count){
@@ -207,7 +209,17 @@ if(($result->num_rows)<=0){
 	$total_pages = 0;
 }
 
+if($_SESSION["rec_num"]>=$row_count || $_SESSION["increment"] == 0){
+	$_SESSION["rec_num"] = 0;
+}
+
+if($_SESSION["increment"] != ($_SESSION["rec_num"]/$form_var[9])){
+	$_SESSION["rec_num"] = ($_SESSION["increment"]*$form_var[9]);
+}
+
 /*echo "alt_sql: ".$alt_sql."</br>";
+echo "</br>".$_SESSION["rec_num"]."; ".$row_count."</br>";
+echo "Session: ".$_SESSION["increment"].", rec_num: ".$_SESSION["rec_num"]."</br>";
 echo "sql1: ".$sql1."</br>";
 echo "numOfRows: ".$numOfRows."<br>";
 echo "row_count: ".$row_count."</br>";
@@ -220,7 +232,8 @@ $rejl1 = "<div class='podaci table-responsive'>
 	<table id='tabela' class='table table-hover table-bordered table-sm'>
 		<thead>
 			<tr>
-				<th class='text-center' colspan='2'>Korisničko ime</th>
+				<th class='text-center'>Redni broj</th>
+				<th class='text-center'>Korisničko ime</th>
 				<th class='text-center'>Šifra</th>
 				<th class='text-center'>Ime</th>
 				<th class='text-center'>Prezime</th>
@@ -243,14 +256,24 @@ if($result->num_rows > 0){
 		
 		$br1++;
 		
+		if(isset($_SESSION["rec_num"]) && $_SESSION["rec_num"]>$br1){
+			$br1 = ($_SESSION["rec_num"]+1);
+		}
+		
+		
 ?>
 		<tr>
-			<td style="border-right: none; border-top: none;"><input type="checkbox"><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
+			<td style=""><?php echo $br1; ?>. <input type="checkbox"><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
 		</tr>
 <?php
+		
+		if(($br1+1)>$_SESSION["rec_num"]){
+			$_SESSION["rec_num"] = $br1;
+		}
+		
 	}
 	echo "</tbody></table></div>";
-
+	
 }
 else{
 	echo "<p class='podaci'>Nema takvog korisnika u bazi!</p>";
