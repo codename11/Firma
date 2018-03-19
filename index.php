@@ -3,6 +3,7 @@ session_start();
 require "header.php";
 require "navbar.php";
 $_SESSION["increment"] = 0;
+$_SESSION["rec_num"] = 0;
 
 ?>
 

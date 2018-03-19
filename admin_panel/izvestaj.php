@@ -101,7 +101,6 @@ switch ($form_var[8]) {
 		$alt_sql = $sql1;
 }
 
-
 if(!(isset($form_var[10])) && empty($form_var[10])){//offset, klik, page number.
 	
 	$form_var[10]="";
@@ -162,7 +161,7 @@ else{
 if($offset<0){
 	
 	$_SESSION["increment"] = floor($row_count/$form_var[9]);
-	$offset = ($row_count-1);
+	$offset = ($row_count);
 	$current_page = $total_pages;
 }
 
@@ -213,10 +212,24 @@ if($_SESSION["rec_num"]>=$row_count || $_SESSION["increment"] == 0){
 	$_SESSION["rec_num"] = 0;
 }
 
-if($_SESSION["increment"] != ($_SESSION["rec_num"]/$form_var[9])){
-	$_SESSION["rec_num"] = ($_SESSION["increment"]*$form_var[9]);
+if($form_var[9] == ""){
+	
+	$_SESSION["rec_num"] = 0;
+	
 }
 
+if($form_var[9] != ""){
+	
+	if($_SESSION["increment"] != ($_SESSION["rec_num"]/$form_var[9])){
+	
+		$_SESSION["rec_num"] = ($_SESSION["increment"]*$form_var[9]);
+	
+	}
+	
+}
+/*echo "</br>";
+print_r($form_var);
+echo "</br>";*/
 /*echo "alt_sql: ".$alt_sql."</br>";
 echo "</br>".$_SESSION["rec_num"]."; ".$row_count."</br>";
 echo "Session: ".$_SESSION["increment"].", rec_num: ".$_SESSION["rec_num"]."</br>";
@@ -263,7 +276,7 @@ if($result->num_rows > 0){
 		
 ?>
 		<tr>
-			<td style=""><?php echo $br1; ?>. <input type="checkbox"><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
+			<td style=""><?php echo $br1; ?>. <input type="checkbox" class="form-check-input" value=""><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
 		</tr>
 <?php
 		

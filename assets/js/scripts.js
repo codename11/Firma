@@ -164,7 +164,7 @@ jQuery(window).load(function() {
 });
 
 
-function serialization(phpdoc,me){
+function serializationx(phpdoc,me){
 	
 	var FormId = me.form.id;
 	
@@ -173,24 +173,39 @@ function serialization(phpdoc,me){
 	var str = phpdoc+"?";
 	var i = 0;
 		
-	var net = document.getElementById(FormId).querySelectorAll("#"+FormId+" [name]");
-	var len = document.getElementById(FormId).length-1;
-		
+	var net = me.form.querySelectorAll("#"+FormId+" [name]");
+	var len = net.length;	
 	while(i<len) {
-			
-		name = net[i].getAttribute("name");
-		val = net[i].value;
-		   
-		i++
+
+	
+		if(net[i].type=="checkbox" && net[i].checked===true){
+			name = net[i].name;
+			net[i].value = "x";
+			val = net[i].value;	
+		}
+		
+		if(net[i].type=="checkbox" && net[i].checked===false){
+			name = net[i].getAttribute("name");
+			net[i].value = "";
+			val = net[i].value;	
+		}
+		
+		if(net[i].type!="checkbox" && net[i].type!="button"){
+			name = net[i].getAttribute("name");
+			val = net[i].value;
+		}
+		
+		i++;
 		str += name+"="+val;
 			
 		if(i<len){
-			str += "&"
+			str += "&";
 		}
 			
 	}
-
+	alert(str);
 	str = encodeURI(str);
+	
 	str1 = str;
 	
 	var xhttp = new XMLHttpRequest();
@@ -203,7 +218,51 @@ function serialization(phpdoc,me){
 		 
 	};
 	
-	xhttp.open("GET", str, false);		
+	xhttp.open("GET", str, false);	
+	xhttp.send();
+	
+}
+
+function serialization(phpdoc,me){
+	
+	var FormId = me.form.id;
+	
+	var name = "";
+	var val = "";
+	var str = phpdoc+"?";
+	var i = 0;
+		
+	var net = me.form.querySelectorAll("#"+FormId+" [name]");
+	var len = net.length;	
+	while(i<len) {
+
+		name = net[i].name;
+		val = net[i].value;	
+		
+		i++;
+		str += name+"="+val;
+			
+		if(i<len){
+			str += "&";
+		}
+			
+	}
+	alert(str);
+	str = encodeURI(str);
+	
+	str1 = str;
+	
+	var xhttp = new XMLHttpRequest();
+		
+	xhttp.onreadystatechange = function() {
+		
+		if((document.getElementById("raport")!=undefined || document.getElementById("raport")!=null) && this.readyState == 4 && this.status == 200){
+			document.getElementById("raport").innerHTML = this.responseText;
+		}
+		 
+	};
+	
+	xhttp.open("GET", str, false);	
 	xhttp.send();
 	
 }
