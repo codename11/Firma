@@ -108,7 +108,7 @@ if(!(isset($form_var[10])) && empty($form_var[10])){//offset, klik, page number.
 }
 
 $konx = new SimpleDB($servername, $username, $password, $dbname);//Make connection
-$row_cnt="SELECT COUNT(id) FROM tel_broj GROUP BY id";//Query to find out number of total
+$row_cnt="SELECT COUNT(id) FROM tel_broj GROUP BY id";//Query to find out number of total ALL rows.
 $row_count = $konx->execute($row_cnt)->num_rows;//Number of ALL rows.
 $numOfRows = $konx->execute($sql1)->num_rows;//Number of records per page
 
@@ -161,8 +161,9 @@ else{
 if($offset<0){
 	
 	$_SESSION["increment"] = floor($row_count/$form_var[9]);
-	$offset = ($row_count);
+	$offset = (floor($row_count/$form_var[9])*$form_var[9]);
 	$current_page = $total_pages;
+	echo "kurac";
 }
 
 if($offset>=$row_count){
@@ -227,10 +228,12 @@ if($form_var[9] != ""){
 	}
 	
 }
+echo "Limit: ".$limit." Offset: ".$offset."</br>";
 /*echo "</br>";
 print_r($form_var);
 echo "</br>";*/
 /*echo "alt_sql: ".$alt_sql."</br>";
+echo "</br>".floor($row_count/$form_var[9])*$form_var[9]."</br>";
 echo "</br>".$_SESSION["rec_num"]."; ".$row_count."</br>";
 echo "Session: ".$_SESSION["increment"].", rec_num: ".$_SESSION["rec_num"]."</br>";
 echo "sql1: ".$sql1."</br>";

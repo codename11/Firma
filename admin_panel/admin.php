@@ -56,7 +56,7 @@ else{
 	
 	<div class="row" id="zr">
 		<div class="radio" style="padding-left: 15px">
-			<label><input type="radio" id="optradio1" name="optradio" value="admin">Admin</label>
+			<label><input type="radio" id="optradio1" name="optradio" value="admin" checked>Admin</label>
 		</div>
 		
 		<div class="radio" style="padding-left: 15px">

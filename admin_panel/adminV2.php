@@ -12,7 +12,7 @@ if(isset($_GET)){
 		$form_var[] = $obj1 -> test_input($obj1 -> getData());
 	
 	}
-	
+
 /*Sadrzaj:
 $form_var[0]== Korisničko ime;
 $form_var[1]== Šifra;

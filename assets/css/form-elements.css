@@ -1,7 +1,7 @@
 
 input[type="text"]:not(#username):not(#cont):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#tel):not(#jmbg):not(#k_ime1):not(#pwd1):not(#ime1):not(#prezime1):not(#email1):not(#tel1):not(#jmbg1), 
-textarea, 
-textarea.form-control {
+textarea:not(#comment1), 
+textarea.form-control:not(#comment1) {
 	height: 50px;
     margin: 0;
     padding: 0 20px;
@@ -18,8 +18,8 @@ textarea.form-control {
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 
-textarea, 
-textarea.form-control {
+textarea:not(#comment1), 
+textarea.form-control:not(#comment1) {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	line-height: 30px;
@@ -37,8 +37,8 @@ input[name="optradio"],input[name="adminmodul"],input[name="ksluzba"],input[name
 }
 
 input[type="text"]:focus:not(#username):not(#k_ime):not(#pwd):not(#ime):not(#prezime):not(#email):not(#sel):not(#jmbg):not(#ime1):not(#k_ime1):not(#prezime1), 
-textarea:focus, 
-textarea.form-control:focus {
+textarea:focus:not(#comment1), 
+textarea.form-control:focus:not(#comment1) {
 	outline: 0;
 	background: #666;
     border: 2px solid #888;
@@ -118,4 +118,8 @@ button.btn:active:focus:not(#btn2), button.btn.active:focus:not(#btn2) {
 	background: -ms-linear-gradient(top,  #ffb24b 0%,#ff8a38 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #ffb24b 0%,#ff8a38 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb24b', endColorstr='#ff8a38',GradientType=0 ); /* IE6-9 */
+}
+
+textarea {
+   resize: none;
 }
