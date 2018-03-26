@@ -293,7 +293,7 @@ function serialization(phpdoc,forma,choice,elemName){
 }
 
 function serializeTrow(me){
-	
+	//Odraditi da procita iz baze o korisniku/radniku+br.tel i odatle popuni modal.
 	var row = me.closest('tr').rowIndex;
 	var table_id = me.closest('table').id;
 	var cells = document.getElementById(table_id).rows[row].cells;
@@ -301,7 +301,7 @@ function serializeTrow(me){
 	
 	var i=0;
 	var arr = [];
-
+//Ovde vadi iz redova tabele.
 	while(i<(len-1)){
 		arr[i]=cells[i].innerHTML;
 		i++;
@@ -312,7 +312,7 @@ function serializeTrow(me){
 	i=0;
 	var modal = document.querySelectorAll(".modal [name]");
 	var mod_len = modal.length;
-	
+	//Ove popunjava modal. Ali bez konsultovanja sa bazom.Napraviti da podatke za modal dobija iz baze.
 	while(i<mod_len){
 
 		if(arr[i]=="fiksni"){
