@@ -292,8 +292,8 @@ function serialization(phpdoc,forma,choice,elemName){
 			
 }
 
-function serializeTrow(me){
-	//Odraditi da procita iz baze o korisniku/radniku+br.tel i odatle popuni modal.
+function serializeTrow(phpdoc,me){
+	
 	var row = me.closest('tr').rowIndex;
 	var table_id = me.closest('table').id;
 	var cells = document.getElementById(table_id).rows[row].cells;
@@ -301,19 +301,35 @@ function serializeTrow(me){
 	
 	var i=0;
 	var arr = [];
-//Ovde vadi iz redova tabele.
+
 	while(i<(len-1)){
 		arr[i]=cells[i].innerHTML;
 		i++;
 	}
 	
 	arr.shift();
-
+	var arrLen = arr.length;
+	
+	var j=0;
+	var str = "";
+	
+	while(j<arrLen){
+		
+		str += "strx"+j+"="+arr[j];
+		
+		if(j<arrLen-1){
+			str += "&";//Adding sign after every appendage except to last one.
+		}
+		
+		j++;
+	}
+	str = phpdoc+"?"+str;
+	
 	i=0;
-	var modal = document.querySelectorAll(".modal [name]");
-	var mod_len = modal.length;
-	//Ove popunjava modal. Ali bez konsultovanja sa bazom.Napraviti da podatke za modal dobija iz baze.
-	while(i<mod_len){
+	var modal = document.getElementById("F3");
+	//var mod_len = modal.length;
+	
+	/*while(i<(len-2)){
 
 		if(arr[i]=="fiksni"){
 			modal[i].value = 1;
@@ -326,8 +342,40 @@ function serializeTrow(me){
 		}
 		
 		i++;
-	}
+	}*/
+	
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    
+		if (this.readyState == 4 && this.status == 200) {
+			
+			var myObj = JSON.parse(this.responseText);
+			
+			var txt = "<div class='row'>";
+			txt += "<div class='form-group col-sm-3'><label for='k_ime'>Korisničko ime:</label><input type='text' class='form-control' id='k_ime1' maxlength='30' placeholder='Unesi korisničko ime:' name='k_ime1' value='"+myObj.k_ime+"' required></div>";
+			txt += "<div class='form-group col-sm-3'><label for='pwd'>Šifra:</label><input type='password' class='form-control' id='pwd1' maxlength='30' placeholder='Unesi željenu šifru' name='pwd1' value='"+myObj.sifra+"' required></div>";
+			txt += "<div class='form-group col-sm-3'><label for='ime'>Ime:</label><input type='text' class='form-control' id='ime1' maxlength='30' placeholder='Unesi ime:' name='ime1' value='"+myObj.ime+"' required></div>";
+			txt += "<div class='form-group col-sm-3'><label for='prezime'>Prezime:</label><input type='text' class='form-control' id='prezime1' maxlength='30' placeholder='Unesi prezime:' name='prezime1' value='"+myObj.prezime+"' required></div>";
+			txt += "</div>";
+			txt += "<div class='row'>";
+			txt += "<div class='form-group col-sm-3'><label for='email'>Email:</label><input type='email' class='form-control' id='email1' maxlength='30' placeholder='Unesi email:' name='email1' value='"+myObj.email+"' required></div>";
+			txt += "<div class='form-group col-sm-3'><label for='tel'>Telefon:</label><input type='number' class='form-control' id='tel1' maxlength='10' placeholder='Unesi telefon:' name='tel1' value='"+myObj.broj+"' required></div>";
+			//txt += "<div class='form-group col-sm-3'><label for='sel4'>Kategorija</label><select id='sel1' class='form-control' name='sel1'><option value='"+myObj.tkid+"'>"+myObj.kategorija+"</option></select></div>";
+			txt += "<div class='form-group col-sm-3'><label for='jmbg'>JMBG:</label><input type='number' class='form-control' id='jmbg1' maxlength='14' placeholder='Unesi jmbg:' name='jmbg1' value='"+myObj.JMBG+"' required></div>";
+			txt += "</div>";
+			//txt += "<div class='row'>";
+			//txt += "<div class='dropdown col-sm-3'><button type='button' id='btn2' class='btn btn-default dropdown-toggle' data-toggle='dropdown'><span>Moduli</span><span class='caret' id='caret1'></span></button><ul id='comp' class='dropdown-menu'><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='adminmodul' id='adminmodul' value='x'> Admin modul</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ksluzba' id='ksluzba' value='x'> Kadrovska služba</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='esalter' id='esalter' value='x'> E-šalter</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='evidencijaio' id='evidencijaio' value='x'> Evidencija ulaza/izlaza</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mposlovanje' id='mposlovanje' value='x'> Materijalno poslovanje</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='emagacin' id='emagacin' value='x'> E-magacin</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='blagajna' id='blagajna' value='x'> Blagajna</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mehanizacija' id='mehanizacija' value='x'> Mehanizacija</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ekancelarija' id='ekancelarija' value='x'> E-kancelarija</label></div></a></li></ul></div>";
+			//txt += "</div>";
+			document.getElementById("F3").innerHTML=txt;
+			
+		}
 
+	};
+	
+	xhttp.open("GET", str, true);
+	//xhttp.open("GET", "modalQuery.php?str="+str, true);
+	xhttp.send();
+	
 }
 
 var klik=0;

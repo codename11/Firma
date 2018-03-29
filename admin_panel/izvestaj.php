@@ -44,13 +44,13 @@ $dbname = $arr[3];
 
 $kon = new SimpleDB($servername, $username, $password, $dbname); 
 
-$sql1 = "SELECT radnik.id, k_ime, radnik.sifra, korisnik.sifra, ime, prezime, email, broj, kategorija, JMBG,tel_kategorija.id AS katid
-FROM korisnik, radnik, tel_broj, tel_kategorija  
+$sql1 = "SELECT radnik.id, k_ime, radnik.sifra, korisnik.sifra, ime, prezime, email, broj, kategorija, JMBG,tel_kategorija.id AS katid, nivo, Admin_modul,Kadrovska_sluzba, E_salter, Evidencija_ulaza_izlaza, Materijalno_poslovanje, E_magacin, Blagajna, Mehanizacija, E_kancelarija
+FROM korisnik, radnik, tel_broj, tel_kategorija, moduli  
 WHERE radnik.id=korisnik.radnik_FK AND radnik.id=tel_broj.radnik_FK
 AND korisnicko_ime LIKE '$form_var[0]%' AND k_ime LIKE '$form_var[0]%' AND korisnicko_ime=k_ime 
 AND ime LIKE '$form_var[2]%' AND prezime LIKE '$form_var[3]%' AND email LIKE '$form_var[4]%' 
 AND broj LIKE '$form_var[5]%' AND tel_kategorija.id LIKE '$form_var[6]%' AND tel_kategorija.id=tel_broj.kategorija_FK 
-AND tel_broj.kategorija_FK LIKE '$form_var[6]%' AND JMBG LIKE '$form_var[7]%' 
+AND tel_broj.kategorija_FK LIKE '$form_var[6]%' AND JMBG LIKE '$form_var[7]%' AND radnik.id=moduli.radnik_FK
 ";
 
 $sql2=" ORDER BY ime ASC";
@@ -140,8 +140,6 @@ if(isset($form_var[10])){/*Determine if eleventh array member is set. And if, wh
 	
 }
 
-
-
 $limit = $form_var[9];//Calculate limit.
 $offset = ($form_var[9]*$_SESSION["increment"]);//Calculate offset.
 $current_page = $_SESSION["increment"]+1;//Number of current page.
@@ -163,7 +161,7 @@ if($offset<0){
 	$_SESSION["increment"] = floor($row_count/$form_var[9]);
 	$offset = (floor($row_count/$form_var[9])*$form_var[9]);
 	$current_page = $total_pages;
-	echo "kurac";
+	
 }
 
 if($offset>=$row_count){
@@ -228,11 +226,12 @@ if($form_var[9] != ""){
 	}
 	
 }
-echo "Limit: ".$limit." Offset: ".$offset."</br>";
+
 /*echo "</br>";
 print_r($form_var);
 echo "</br>";*/
 /*echo "alt_sql: ".$alt_sql."</br>";
+echo "Limit: ".$limit." Offset: ".$offset."</br>";
 echo "</br>".floor($row_count/$form_var[9])*$form_var[9]."</br>";
 echo "</br>".$_SESSION["rec_num"]."; ".$row_count."</br>";
 echo "Session: ".$_SESSION["increment"].", rec_num: ".$_SESSION["rec_num"]."</br>";
@@ -279,7 +278,7 @@ if($result->num_rows > 0){
 		
 ?>
 		<tr>
-			<td style=""><?php echo $br1; ?>. <input type="checkbox" class="form-check-input" value=""><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow(this)">Update</button></td>
+			<td style=""><?php echo $br1; ?>. <input type="checkbox" class="form-check-input" value=""><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow('modalQuery.php',this)">Update</button></td>
 		</tr>
 <?php
 		
