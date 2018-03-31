@@ -237,7 +237,7 @@ function serialization(phpdoc,forma,choice,elemName){
 
 		i++;
 	}
-
+	
 	var res = str.split("&");//Splitting string to array to remove duplicates.
 	var resLen = res.length;//Length of said array.
 	res = res.filter(function(elem, index, self) {//Duplicate filtration.
@@ -249,18 +249,23 @@ function serialization(phpdoc,forma,choice,elemName){
 		
 		if(res[i]!==undefined){
 			str += res[i];//Appending filtered names and values.
-			
 			var Eqsign = res[i].indexOf("=");//Locating coordinates of equal sign.
 			obj.name[i] = res[i].substring(0,Eqsign);//Assigning names to name subarray after "substring it" without equal sign.
 			obj.value[i] = res[i].substring(Eqsign+1);//Assigning values to value subarray after "substring it" without equal sign.
 		}
-		
+
 		if(i<resLen-1){
 			str += "&";//Adding sign after every appendage except to last one.
 		}
 		
 	}
+	
+	var strLen = str.length;
+	if(str.substring(strLen-1,strLen)=="&"){
 
+		str = str.substring(0,strLen-1);
+	}
+	
 	var jason = JSON.stringify(obj);//Parsing previously said object to json string.
 	str = encodeURI(doc+str);//Creating string suitable for sending it with ordinary ajax request.
 	str1 = str;
@@ -325,25 +330,8 @@ function serializeTrow(phpdoc,me){
 	}
 	str = phpdoc+"?"+str;
 	
-	i=0;
 	var modal = document.getElementById("F3");
-	//var mod_len = modal.length;
-	
-	/*while(i<(len-2)){
 
-		if(arr[i]=="fiksni"){
-			modal[i].value = 1;
-		}
-		else if(arr[i]=="mobilni"){
-			modal[i].value = 2;
-		}
-		else{
-			modal[i].value = arr[i];
-		}
-		
-		i++;
-	}*/
-	
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     
@@ -360,12 +348,108 @@ function serializeTrow(phpdoc,me){
 			txt += "<div class='row'>";
 			txt += "<div class='form-group col-sm-3'><label for='email'>Email:</label><input type='email' class='form-control' id='email1' maxlength='30' placeholder='Unesi email:' name='email1' value='"+myObj.email+"' required></div>";
 			txt += "<div class='form-group col-sm-3'><label for='tel'>Telefon:</label><input type='number' class='form-control' id='tel1' maxlength='10' placeholder='Unesi telefon:' name='tel1' value='"+myObj.broj+"' required></div>";
-			//txt += "<div class='form-group col-sm-3'><label for='sel4'>Kategorija</label><select id='sel1' class='form-control' name='sel1'><option value='"+myObj.tkid+"'>"+myObj.kategorija+"</option></select></div>";
+			
+			i=0;
+			
+			txt += "<div class='form-group col-sm-3'><label for='sel4'>Kategorija</label><select id='sel1' class='form-control' name='sel1'>";
+			while(i<myObj.kat.length){
+				
+				if(myObj.tkid==myObj.katid[i]){
+					txt += "<option value='"+myObj.katid[i]+"' selected>"+myObj.kat[i]+"</option>";
+				}
+				else{
+					txt += "<option value='"+myObj.katid[i]+"'>"+myObj.kat[i]+"</option>";
+				}
+				i++;
+			}
+			txt += "</select></div>";
+			
 			txt += "<div class='form-group col-sm-3'><label for='jmbg'>JMBG:</label><input type='number' class='form-control' id='jmbg1' maxlength='14' placeholder='Unesi jmbg:' name='jmbg1' value='"+myObj.JMBG+"' required></div>";
 			txt += "</div>";
-			//txt += "<div class='row'>";
-			//txt += "<div class='dropdown col-sm-3'><button type='button' id='btn2' class='btn btn-default dropdown-toggle' data-toggle='dropdown'><span>Moduli</span><span class='caret' id='caret1'></span></button><ul id='comp' class='dropdown-menu'><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='adminmodul' id='adminmodul' value='x'> Admin modul</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ksluzba' id='ksluzba' value='x'> Kadrovska služba</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='esalter' id='esalter' value='x'> E-šalter</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='evidencijaio' id='evidencijaio' value='x'> Evidencija ulaza/izlaza</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mposlovanje' id='mposlovanje' value='x'> Materijalno poslovanje</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='emagacin' id='emagacin' value='x'> E-magacin</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='blagajna' id='blagajna' value='x'> Blagajna</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mehanizacija' id='mehanizacija' value='x'> Mehanizacija</label></div></a></li><li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ekancelarija' id='ekancelarija' value='x'> E-kancelarija</label></div></a></li></ul></div>";
-			//txt += "</div>";
+			
+			var sel = "checked";
+			
+			txt += "<div class='row'>";
+
+			txt += "<div class='dropdown col-sm-3'><button type='button' id='btn2' class='btn btn-default dropdown-toggle' data-toggle='dropdown'><span>Moduli</span><span class='caret' id='caret1'></span></button><ul id='comp' class='dropdown-menu'>";
+			if(myObj.Admin_modul=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='adminmodul' id='adminmodul' value='x' checked> Admin modul</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='adminmodul' id='adminmodul' value='x'> Admin modul</label></div></a></li>";
+			}
+			
+			if(myObj.Kadrovska_sluzba=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ksluzba' id='ksluzba' value='x' checked> Kadrovska služba</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ksluzba' id='ksluzba' value='x'> Kadrovska služba</label></div></a></li>";
+			}
+			
+			if(myObj.E_salter=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='esalter' id='esalter' value='x' checked> E-šalter</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='esalter' id='esalter' value='x'> E-šalter</label></div></a></li>";
+			}
+			
+			if(myObj.Evidencija_ulaza_izlaza=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='evidencijaio' id='evidencijaio' value='x' checked> Evidencija ulaza/izlaza</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='evidencijaio' id='evidencijaio' value='x'> Evidencija ulaza/izlaza</label></div></a></li>";
+			}
+			
+			if(myObj.Materijalno_poslovanje=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mposlovanje' id='mposlovanje' value='x' checked> Materijalno poslovanje</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mposlovanje' id='mposlovanje' value='x'> Materijalno poslovanje</label></div></a></li>";
+			}
+			
+			
+			if(myObj.E_magacin=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='emagacin' id='emagacin' value='x' checked> E-magacin</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='emagacin' id='emagacin' value='x'> E-magacin</label></div></a></li>";
+			}
+			if(myObj.Blagajna=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='blagajna' id='blagajna' value='x' checked> Blagajna</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='blagajna' id='blagajna' value='x'> Blagajna</label></div></a></li>";
+			}
+			
+			if(myObj.Mehanizacija=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mehanizacija' id='mehanizacija' value='x' checked> Mehanizacija</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mehanizacija' id='mehanizacija' value='x'> Mehanizacija</label></div></a></li>";
+			}
+			
+			if(myObj.E_kancelarija=="x"){
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ekancelarija' id='ekancelarija' value='x' checked> E-kancelarija</label></div></a></li>";
+			}
+			else{
+				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='ekancelarija' id='ekancelarija' value='x'> E-kancelarija</label></div></a></li>";
+			}
+			
+			txt += "</ul></div>";
+			
+			txt += "<div class='col-sm-3'>";
+			
+			if(myObj.nivo=="admin"){
+				txt += "<label style='float:left'><input type='radio' name='optradio' value='admin' checked>Admin</label>";
+				txt += "<label style='float:right'><input type='radio' name='optradio' value='user'>User</label>";
+			}
+			else if(myObj.nivo=="user"){
+				txt += "<label style='float:left'><input type='radio' name='optradio' value='admin'>Admin</label>";
+				txt += "<label style='float:right'><input type='radio' name='optradio' value='user' checked>User</label>";
+			}												
+								
+			txt += "</div>";
+			txt += "</div>";
 			document.getElementById("F3").innerHTML=txt;
 			
 		}

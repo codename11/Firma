@@ -54,10 +54,27 @@ AND broj LIKE '$form_var[5]%' AND radnik.id=tel_broj.radnik_FK AND tel_kategorij
 AND radnik.id=moduli.radnik_FK";
 $result = $kon->execute($sql1);
 
+$kon2 = new SimpleDB($servername, $username, $password, $dbname); 
+$sql2 = "SELECT tel_kategorija.id AS katid, kategorija AS kat FROM tel_kategorija";
+$result2 = $kon2->execute($sql2);
+
 $br1=0;	
+
+$arr = array();
 
 if(!isset($myObj)){
 	$myObj = new \stdClass();
+}
+
+$katid = []; 
+$kat = []; 		
+if($result2->num_rows > 0){
+
+	while($row = $result2->fetch_assoc()) {
+		$myObj->katid[] = $row["katid"];
+		$myObj->kat[] = $row["kat"];
+	}
+
 }
 
 if($result->num_rows > 0){
@@ -92,6 +109,7 @@ if($result->num_rows > 0){
 		
 	}
 }
+
 ?>
 
 

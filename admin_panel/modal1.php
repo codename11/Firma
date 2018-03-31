@@ -95,12 +95,8 @@
 							</div>
 							
 							<div class="col-sm-3">
-								
-									<label><input type="radio" name="optradio" value="admin" checked>Admin</label>
-								
-								
-									<label><input type="radio" name="optradio" value="user">User</label>
-								
+								<label><input type="radio" name="optradio" value="admin" checked>Admin</label>								
+								<label><input type="radio" name="optradio" value="user">User</label>
 							</div>
 						
 						</div>
