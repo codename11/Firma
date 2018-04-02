@@ -407,7 +407,6 @@ function serializeTrow(phpdoc,me){
 				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='mposlovanje' id='mposlovanje' value='x'> Materijalno poslovanje</label></div></a></li>";
 			}
 			
-			
 			if(myObj.E_magacin=="x"){
 				txt += "<li><a class='dropdown-item'><div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='emagacin' id='emagacin' value='x' checked> E-magacin</label></div></a></li>";
 			}
@@ -457,7 +456,6 @@ function serializeTrow(phpdoc,me){
 	};
 	
 	xhttp.open("GET", str, true);
-	//xhttp.open("GET", "modalQuery.php?str="+str, true);
 	xhttp.send();
 	
 }
@@ -485,4 +483,20 @@ function pagination(me){
 	
 	xhttp.send();
 
+}
+
+function delRec(phpdoc,tab){
+	
+	var tabBox = tab.querySelectorAll("#"+tab.id+" [type=checkbox]");
+	var tabLen = tabBox.length;
+	
+	var i = 0;
+	while(i<tabLen) {
+
+		if(tabBox[i]!="undefined" && tabBox[i].type=="checkbox" && tabBox[i].checked===true){//Checking if radio button is checked.
+			alert(i);
+		}
+		i++;
+	}
+	alert(phpdoc);
 }

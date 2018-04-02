@@ -49,7 +49,7 @@ input[type="text"]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-co
 input[type="text"]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #ddd; }
 input[type="text"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #ddd; }
 
-button.btn:not(.bla):not(#btn2) {
+button.btn:not(.bla):not(#btn2):not(#del1) {
 	height: 50px;
     margin: 0;
     padding: 0 40px;
@@ -104,8 +104,8 @@ button.btn:not(.bla):not(#btn2) {
 	background-color: #ffa500;         
 }
 
-button.btn:hover:not(#btn2), button.btn:active:not(#btn2), button.btn:focus:not(#btn2), 
-button.btn:active:focus:not(#btn2), button.btn.active:focus:not(#btn2) {
+button.btn:hover:not(#btn2):not(#del1), button.btn:active:not(#btn2):not(#del1), button.btn:focus:not(#btn2):not(#del1), 
+button.btn:active:focus:not(#btn2):not(#del1), button.btn.active:focus:not(#btn2):not(#del1) {
 	opacity: 0.6;
 	outline: 0;
 	color: #fff;

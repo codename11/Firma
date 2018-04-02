@@ -244,7 +244,7 @@ echo "</br>".$form_var[9]."*".$_SESSION["increment"]." = ".$form_var[9]*$_SESSIO
 echo "Strana ".$current_page." od ".$total_pages."</br>";
 
 $rejl1 = "<div class='podaci table-responsive'>
-	<table id='tabela' class='table table-hover table-bordered table-sm'>
+	<table id='tabela' class='table table-hover table-bordered table-sm' style='background-color: black'>
 		<thead>
 			<tr>
 				<th class='text-center'>Redni broj</th>
@@ -288,14 +288,14 @@ if($result->num_rows > 0){
 		
 	}
 	echo "</tbody></table></div>";
-	
+	echo "";
 }
 else{
 	echo "<p class='podaci'>Nema takvog korisnika u bazi!</p>";
 }
 
 ?>
-
+</br><button type='button' id='del1' class='btn btn-danger' onclick="delRec('delRec.php',tabela);">Delete/Izbriši</button></br>
 
 <ul class="pagination">
 	<li class="page-item"><a class="page-link" id="prev" href="#" onclick='pagination(this);'>Prev</a></li>
