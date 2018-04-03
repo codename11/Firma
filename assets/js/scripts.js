@@ -485,18 +485,35 @@ function pagination(me){
 
 }
 
-function delRec(phpdoc,tab){
+function delRec(phpdoc,tab,me){
 	
 	var tabBox = tab.querySelectorAll("#"+tab.id+" [type=checkbox]");
 	var tabLen = tabBox.length;
+	var table=document.getElementById(tab.id);
+	var rowLen = table.rows.length;
+	var arr = [];
+	var str = "";
 	
-	var i = 0;
-	while(i<tabLen) {
-
-		if(tabBox[i]!="undefined" && tabBox[i].type=="checkbox" && tabBox[i].checked===true){//Checking if radio button is checked.
-			alert(i);
+	for(var i=0;i<tabLen;i++){
+		
+		for(var j=1;j<rowLen-1;j++){
+			if(tabBox[i].checked===true){
+			str += tabBox[i].closest("tr").cells[j].innerHTML;
+			
+				if(j!=rowLen-2){
+					str += ",";
+				}
+			
+			}
+			
 		}
-		i++;
+		
+		arr[i]=str;
+		str="";
+		
 	}
-	alert(phpdoc);
+	
+	arr = arr.filter(function(n){ return n != "" }); 
+	alert(arr);
+	
 }

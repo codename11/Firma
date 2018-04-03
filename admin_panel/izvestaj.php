@@ -278,7 +278,7 @@ if($result->num_rows > 0){
 		
 ?>
 		<tr>
-			<td style=""><?php echo $br1; ?>. <input type="checkbox" class="form-check-input" value=""><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow('modalQuery.php',this)">Update</button></td>
+			<td style=""><?php echo $br1; ?>. <input type="checkbox" class="form-check-input bx" value=""><?php $_SESSION["id"]=$row["id"]; ?></td><td style="border-left: none; border-top: none;"><?php echo $row["k_ime"]; ?></td><td><?php echo $row["sifra"]; ?></td><td><?php echo $row["ime"]; ?></td><td><?php echo $row["prezime"]; ?></td><td><?php echo $row["email"]; ?></td><td><?php echo $row["broj"]; ?></td><td><?php echo $row["kategorija"]; ?></td><td style="border-right: none;"><?php echo $row["JMBG"]; ?></td><td style="border-left: none; border-top: none;"><button type="button"  data-toggle="modal" data-target="#myModal1" onclick="serializeTrow('modalQuery.php',this)">Update</button></td>
 		</tr>
 <?php
 		
@@ -295,7 +295,7 @@ else{
 }
 
 ?>
-</br><button type='button' id='del1' class='btn btn-danger' onclick="delRec('delRec.php',tabela);">Delete/Izbriši</button></br>
+</br><button type='button' id='del1' class='btn btn-danger' onclick="delRec('delRec.php',tabela,this);">Delete/Izbriši</button></br>
 
 <ul class="pagination">
 	<li class="page-item"><a class="page-link" id="prev" href="#" onclick='pagination(this);'>Prev</a></li>
