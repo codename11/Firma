@@ -494,6 +494,17 @@ function delRec(phpdoc,tab,me){
 	var arr = [];
 	var str = "";
 	
+	var obj = {
+			"k_ime" : [],
+			"sifra" : [],
+			"ime" : [],
+			"prezime" : [],
+			"email" : [],
+			"tel" : [],
+			"kat" : [],
+			"jmbg" : []
+		};
+	
 	for(var i=0;i<tabLen;i++){
 		
 		for(var j=1;j<rowLen-1;j++){
@@ -514,6 +525,41 @@ function delRec(phpdoc,tab,me){
 	}
 	
 	arr = arr.filter(function(n){ return n != "" }); 
-	alert(arr);
+	
+	var arrx = [];
+	var arrxLen = 0;
+	for(var i=0;i<arr.length;i++){
+		
+		arrx = arr[i].split(",");
+		arrxLen = arrx.length;
+		
+		obj.k_ime[i] = arrx[0];
+		obj.sifra[i] = arrx[1];
+		obj.ime[i] = arrx[2];
+		obj.prezime[i] = arrx[3];
+		obj.email[i] = arrx[4];
+		obj.tel[i] = arrx[5];
+		obj.kat[i] = arrx[6];
+		obj.jmbg[i] = arrx[7];
+		
+	}
+	
+	var xhttp = new XMLHttpRequest();
+			
+	xhttp.onreadystatechange = function() {
+		
+		if(this.readyState == 4 && this.status == 200){
+			alert(this.responseText);
+			//document.getElementById(formax.id).reset(); 
+			
+		}
+		 
+	};
+	
+	var jason = JSON.stringify(obj);
+	
+	xhttp.open("GET", phpdoc+"?jason="+jason,true);
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	xhttp.send();
 	
 }
