@@ -487,14 +487,14 @@ function pagination(me){
 
 function delRec(phpdoc,tab,me){
 	
-	var tabBox = tab.querySelectorAll("#"+tab.id+" [type=checkbox]");
-	var tabLen = tabBox.length;
-	var table=document.getElementById(tab.id);
-	var rowLen = table.rows[0].cells.length;
-	var arr = [];
-	var str = "";
+	var tabBox = tab.querySelectorAll("#"+tab.id+" [type=checkbox]");//Gathers all checkboxes.
+	var tabLen = tabBox.length;//Counts how many checkboxes are currently displayed.
+	var table=document.getElementById(tab.id);//Gets table id.
+	var rowLen = table.rows[0].cells.length;//Counts how many columns are in any given row. Since all rows are the same, i used first one for this counting.
+	var arr = []; //Array used for storage of data gathered from one row per one array element.
+	var str = "";//String that is used as temp. storage of column contents.
 
-	var obj = {
+	var obj = {//An JS object for stringification.
 			"k_ime" : [],
 			"sifra" : [],
 			"ime" : [],
@@ -505,13 +505,13 @@ function delRec(phpdoc,tab,me){
 			"jmbg" : []
 		};
 	
-	for(var i=0;i<tabLen;i++){
+	for(var i=0;i<tabLen;i++){//Traversing through table rows.
 		
-		for(var j=1;j<(rowLen);j++){
-			if(tabBox[i].checked===true){
-			str += tabBox[i].closest("tr").cells[j].innerHTML;
+		for(var j=1;j<(rowLen);j++){//Traversing through row's columns.
+			if(tabBox[i].checked===true){//If checked only then is added content from table row.
+			str += tabBox[i].closest("tr").cells[j].innerHTML;//Adding column's content to string for temp storage.
 			
-				if(j!=(rowLen)){
+				if(j!=(rowLen)){//It adds a ',' sign after every extraction of column's content except after last extracted element's contents.
 					str += ",";
 				}
 			
@@ -519,20 +519,20 @@ function delRec(phpdoc,tab,me){
 			
 		}
 		
-		arr[i]=str;
-		str="";
+		arr[i]=str;//Storing entire row content per array element.
+		str="";//Resets temp storage after stroring to array.
 		
 	}
 	
-	arr = arr.filter(function(n){ return n != "" }); 
+	arr = arr.filter(function(n){ return n != "" });//Filter duplicates lleaving only one of each. It filters only empty array elements, then rearranges array.
 	
-	var arrx = [];
-	var arrxLen = 0;
-	for(var i=0;i<arr.length;i++){
+	var arrx = [];//A temporary array for each cell individual content.
+	var arrxLen = 0;//Length of said array, not yet determined.
+	for(var i=0;i<arr.length;i++){//Itteration through array with row/columns content.Previously mentioned array
 		
-		arrx = arr[i].split(",");
-		arrxLen = arrx.length;
-		
+		arrx = arr[i].split(",");//Splitting each member of previous array for values are between each of ',' signs.
+		arrxLen = arrx.length;  
+		//Assigning values to each element of temp array from current element of previous array to JS object. 
 		obj.k_ime[i] = arrx[0];
 		obj.sifra[i] = arrx[1];
 		obj.ime[i] = arrx[2];
@@ -556,10 +556,10 @@ function delRec(phpdoc,tab,me){
 		 
 	};
 	
-	var jason = JSON.stringify(obj);
+	var jason = JSON.stringify(obj);//Stringification of an object.
 
-	xhttp.open("GET", phpdoc+"?jason="+jason,true);
-	xhttp.setRequestHeader("Content-Type", "application/json");
+	xhttp.open("GET", phpdoc+"?jason="+jason,true);//Sending stringified json.
+	xhttp.setRequestHeader("Content-Type", "application/json");//A header need for server to understend what kind a data has been sent to.
 	xhttp.send();
 	
 }
