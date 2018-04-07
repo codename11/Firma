@@ -490,10 +490,10 @@ function delRec(phpdoc,tab,me){
 	var tabBox = tab.querySelectorAll("#"+tab.id+" [type=checkbox]");
 	var tabLen = tabBox.length;
 	var table=document.getElementById(tab.id);
-	var rowLen = table.rows.length;
+	var rowLen = table.rows[0].cells.length;
 	var arr = [];
 	var str = "";
-	
+
 	var obj = {
 			"k_ime" : [],
 			"sifra" : [],
@@ -507,11 +507,11 @@ function delRec(phpdoc,tab,me){
 	
 	for(var i=0;i<tabLen;i++){
 		
-		for(var j=1;j<rowLen-1;j++){
+		for(var j=1;j<(rowLen);j++){
 			if(tabBox[i].checked===true){
 			str += tabBox[i].closest("tr").cells[j].innerHTML;
 			
-				if(j!=rowLen-2){
+				if(j!=(rowLen)){
 					str += ",";
 				}
 			
@@ -557,7 +557,7 @@ function delRec(phpdoc,tab,me){
 	};
 	
 	var jason = JSON.stringify(obj);
-	
+
 	xhttp.open("GET", phpdoc+"?jason="+jason,true);
 	xhttp.setRequestHeader("Content-Type", "application/json");
 	xhttp.send();

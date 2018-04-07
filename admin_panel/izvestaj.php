@@ -100,6 +100,7 @@ switch ($form_var[8]) {
         $sql1.=$sql2;
 		$alt_sql = $sql1;
 }
+$alt_sql = $sql1;
 
 if(!(isset($form_var[10])) && empty($form_var[10])){//offset, klik, page number.
 	
@@ -227,20 +228,6 @@ if($form_var[9] != ""){
 	
 }
 
-/*echo "</br>";
-print_r($form_var);
-echo "</br>";*/
-/*echo "alt_sql: ".$alt_sql."</br>";
-echo "Limit: ".$limit." Offset: ".$offset."</br>";
-echo "</br>".floor($row_count/$form_var[9])*$form_var[9]."</br>";
-echo "</br>".$_SESSION["rec_num"]."; ".$row_count."</br>";
-echo "Session: ".$_SESSION["increment"].", rec_num: ".$_SESSION["rec_num"]."</br>";
-echo "sql1: ".$sql1."</br>";
-echo "numOfRows: ".$numOfRows."<br>";
-echo "row_count: ".$row_count."</br>";
-echo "Session: ".$_SESSION["increment"]."</br>";
-echo "Limit: ".$limit." Offset: ".$offset."</br>";
-echo "</br>".$form_var[9]."*".$_SESSION["increment"]." = ".$form_var[9]*$_SESSION["increment"]."<br>";*/
 echo "Strana ".$current_page." od ".$total_pages."</br>";
 
 $rejl1 = "<div class='podaci table-responsive'>
