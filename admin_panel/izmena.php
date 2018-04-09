@@ -3,7 +3,7 @@ session_start();
 require "../header.php";
 
 if($_SESSION["confirm"]==true){
-	echo "Trenutno ulogovani korisnik: ".$_SESSION["username"];
+	echo "Trenutno ulogovani korisnik: ".$_SESSION["username"]."<a type='button' id='logout1' href='/www/knjigovodstvo/logout.php' class='btn btn-default'>LogOf</a>";
 }
 else{
 	header('Location: /www/knjigovodstvo/index.php');
@@ -12,6 +12,7 @@ $_SESSION["increment"] = 0;
 ?>
 
 <div class="container" id="kont" class="kont">
+
 	<?php require "subnav.php"; ?>
 
 		<form id="F2" class="vcenter" autocomplete="on">
@@ -131,6 +132,7 @@ $_SESSION["increment"] = 0;
 				
 			</div>
 		</div>
+
 </div>
 
 <div class="container-fluid text-center" style="font-family:Palatino Linotype;">

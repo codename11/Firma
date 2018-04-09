@@ -3,7 +3,7 @@ session_start();
 require "../header.php";
 
 if($_SESSION["confirm"]==true){
-	echo "Trenutno ulogovani korisnik: ".$_SESSION["username"];
+	echo "Trenutno ulogovani korisnik: ".$_SESSION["username"]."<a type='button' id='logout2' href='/www/knjigovodstvo/logout.php' class='btn btn-default'>LogOut</a>";
 }
 else{
 	header('Location: /www/knjigovodstvo/index.php');
@@ -136,8 +136,6 @@ else{
 		<div class="col-sm-4"></div>
 	
 	</div>
-	
-	
 	
   </form>
   

@@ -654,6 +654,14 @@ font-family:Palatino Linotype;
 color: white;	
 }
 
+#logout1,#logout2{
+	position:absolute; 
+	top: 1%; 
+	right: 1%; 
+	z-index:1; 
+	font-family:Palatino Linotype;
+}
+
 html, body, #top-content1{
 	height: 100%; width: 100%;
 	background-image: url("1.jpg");
@@ -669,4 +677,11 @@ html, body, #top-content1{
 
 .klasicay{
 	border: 0px solid #99ccff;
+}
+
+.anm{
+	transition: opacity 1s ease-out;
+    opacity: 0; 
+    height: 0;
+    overflow: hidden;
 }

@@ -520,7 +520,7 @@ function delRec(phpdoc,tab,me){
 		}
 		
 		arr[i]=str;//Storing entire row content per array element.
-		str="";//Resets temp storage after stroring to array.
+		str="";//Resets temp storage after storing to array.
 		
 	}
 	
@@ -552,10 +552,19 @@ function delRec(phpdoc,tab,me){
 			console.log(this.responseText);
 			//document.getElementById(formax.id).reset(); 
 			
+			for(var i=0;i<tabLen;i++){//Traversing through table rows.
+		
+				if(tabBox[i].checked===true){//If checked only then is added content from table row.
+					tabBox[i].closest("tr").remove();
+					//document.getElementById(tab.id).deleteRow(i+1);
+				}
+					
+			}
+
 		}
 		 
 	};
-	
+	//alert(tab.id);
 	var jason = JSON.stringify(obj);//Stringification of an object.
 
 	xhttp.open("GET", phpdoc+"?jason="+jason,true);//Sending stringified json.
