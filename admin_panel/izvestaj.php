@@ -135,6 +135,7 @@ if(isset($form_var[10])){/*Determine if eleventh array member is set. And if, wh
 		if(is_numeric($form_var[10][3])===true){//Setting increment, thus now we are able to calculate offset from page number.
 
 			$_SESSION["increment"] = $form_var[10][3];
+
 		}
 		
 	}
@@ -286,35 +287,35 @@ else{
 
 <ul class="pagination">
 	<li class="page-item"><a class="page-link" id="prev" href="#" onclick='pagination(this);'>Prev</a></li>
-  
-  <?php
+	
+	<?php
 	
 	$i=0;
 	
-	while($i<$total_pages){
-		
-		if(($i+1)==$current_page){
-		
-		?>
-  
-	<li class="page-item active"><a id="num<?php echo $i; ?>" class="page-link" href="#"  onclick='pagination(this);'><?php echo ($i+1); ?></a></li>
-  
-  <?php	
-		}
-		else{
-			?>
+		while($i<$total_pages){
 			
-			<li class="page-item"><a id="num<?php echo $i; ?>" class="page-link" href="#"  onclick='pagination(this);'><?php echo ($i+1); ?></a></li>
-		
-		<?php
-		}
-		$i++;
-	}
+			if(($i+1>=$current_page-1 && $i+1<=$current_page) || ($i+1<=$current_page+1 && $i+1>=$current_page)){
+			
+				if(($i+1)==$current_page){
 
-?>	
+	?>
+				<li class="page-item active"><a id="num<?php echo $i; ?>" class="page-link" href="#"  onclick='pagination(this);'><?php echo ($i+1); ?></a></li>
+	<?php	
+				}
+				else{
+	?>
+				
+					<li class="page-item"><a id="num<?php echo $i; ?>" class="page-link" href="#"  onclick='pagination(this);'><?php echo ($i+1); ?></a></li>
+			
+		<?php
+				}
+			}
+			$i++;
+
+		}
+
+	?>	
   
 	<li class="page-item"><a class="page-link" id="next" href="#" onclick='pagination(this);'>Next</a></li>
+
 </ul>
-
-
-

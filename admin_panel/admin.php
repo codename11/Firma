@@ -8,7 +8,7 @@ if($_SESSION["confirm"]==true){
 else{
 	header('Location: /www/knjigovodstvo/index.php');
 }
-
+$_SESSION["increment"] = 0;
 ?>
 <div class="top-content">
 	<div class="container" id="cont">
