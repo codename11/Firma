@@ -717,3 +717,12 @@ html, body, #top-content1{
 	width:50%;
 	border:1px solid #8c8c8c;
 }
+
+ .test + .tooltip > .tooltip-inner {
+      background-color: #73AD21; 
+      color: #FFFFFF; 
+      border: 1px solid green; 
+      padding: 15px;
+      font-size: 20px;
+  }
+
