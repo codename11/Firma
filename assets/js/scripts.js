@@ -12,7 +12,7 @@ function scroll_to(clicked_link, nav_height) {
 }
 
 jQuery(document).ready(function() {
-	
+	$('[data-toggle="tooltip"]').tooltip(); 
 	//Form handling
 	var url1 = "/www/knjigovodstvo/install/inst.php";
 	$("#dform").submit(function() {

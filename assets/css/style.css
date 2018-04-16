@@ -685,3 +685,35 @@ html, body, #top-content1{
     height: 0;
     overflow: hidden;
 }
+
+.footer-container{
+	border-top: 2px solid #595959;
+}
+
+.kl1{
+	background-color:#e6e6e6; 
+	border-top: 2px solid #8c8c8c;
+}
+
+.kl2{
+	margin-top:10%;
+	margin-bottom:10%;
+}
+
+.kl3{
+	width:50%;
+	border-radius: 5%;
+	border:1px solid #8c8c8c;
+	margin-bottom: 10%;
+}
+
+.kl4{
+	background-image: url('fs.jpg'); 
+	border-top: 3px solid #cccccc;
+}
+
+.kl5{
+	margin:auto;
+	width:50%;
+	border:1px solid #8c8c8c;
+}
